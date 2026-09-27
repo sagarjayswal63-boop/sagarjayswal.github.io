@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+  <title>Sagar Jayswal — Automation & Controls Resume</title>
+  <style>
+    :root { --ink:#151618; --muted:#55585d; --orange:#db570d; --line:#d6d6d2; }
+    * { box-sizing:border-box; }
+    body { margin:0; color:var(--ink); background:#e8e8e5; font:10.5pt/1.42 Arial,sans-serif; }
+    main { width:210mm; min-height:297mm; margin:20px auto; padding:15mm 16mm; background:#fff; box-shadow:0 16px 55px rgba(0,0,0,.14); }
+    header { display:grid; grid-template-columns:1fr auto; gap:20px; padding-bottom:12px; border-bottom:3px solid var(--ink); }
+    h1 { margin:0; font-size:30pt; line-height:.95; letter-spacing:-1.5px; text-transform:uppercase; }
+    .role { margin:7px 0 0; color:var(--orange); font-size:12pt; font-weight:700; }
+    .contact { display:grid; align-content:start; gap:4px; text-align:right; font-size:9pt; }
+    .contact a { color:inherit; text-decoration:none; }
+    section { margin-top:13px; }
+    h2 { margin:0 0 7px; font-size:10pt; letter-spacing:1.4px; text-transform:uppercase; color:var(--orange); }
+    p { margin:0; }
+    .summary { font-size:10.5pt; }
+    .skills { display:grid; grid-template-columns:repeat(3,1fr); gap:8px 14px; }
+    .skill { padding-top:5px; border-top:1px solid var(--line); }
+    .skill strong { display:block; margin-bottom:2px; }
+    .entry { display:grid; grid-template-columns:130px 1fr; gap:14px; padding:7px 0; border-top:1px solid var(--line); }
+    .entry time { color:var(--muted); font-size:9pt; }
+    h3 { margin:0; font-size:11pt; }
+    .company { margin:1px 0 3px; color:var(--muted); font-size:9.5pt; }
+    ul { margin:3px 0 0; padding-left:17px; }
+    li { margin:1px 0; }
+    .projects { display:grid; grid-template-columns:1fr 1fr; gap:10px 20px; }
+    .project { padding-top:6px; border-top:1px solid var(--line); }
+    .project p { margin-top:3px; font-size:9.5pt; }
+    .education .entry { padding:5px 0; }
+    .print { position:fixed; right:22px; bottom:22px; border:0; padding:12px 16px; background:var(--orange); color:#fff; font-weight:700; cursor:pointer; }
+    @page { size:A4; margin:0; }
+    @media print { body { background:#fff; } main { margin:0; box-shadow:none; } .print { display:none; } }
+    @media (max-width:800px) { main { width:100%; min-height:0; margin:0; padding:24px 20px; } header { grid-template-columns:1fr; } .contact { text-align:left; } .skills,.projects { grid-template-columns:1fr; } .entry { grid-template-columns:1fr; gap:2px; } }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <div><h1>Sagar Jayswal</h1><p class="role">Automation &amp; Controls Technician</p></div>
+      <div class="contact"><span>Scarborough, Ontario</span><a href="mailto:sagarjayswal63@gmail.com">sagarjayswal63@gmail.com</a><a href="https://www.linkedin.com/in/sagar-jayswal">linkedin.com/in/sagar-jayswal</a></div>
+    </header>
+
+    <section><h2>Profile</h2><p class="summary">Automation technician with hands-on experience programming, commissioning and troubleshooting PLC-controlled equipment. Works across control panels, PLC/HMI logic, machine vision, robotics, pneumatics, industrial communication and production support, with a methodical focus on safe and maintainable solutions.</p></section>
+
+    <section><h2>Technical Skills</h2><div class="skills">
+      <div class="skill"><strong>PLC &amp; HMI</strong>Omron Sysmac Studio, CX-Programmer, Siemens TIA Portal, Allen-Bradley Studio 5000</div>
+      <div class="skill"><strong>Vision &amp; Robotics</strong>Keyence IV2/IV3, camera-to-PLC interfacing, Wittmann robot teaching, EOAT</div>
+      <div class="skill"><strong>Field Systems</strong>I/O verification, sensors, VFDs, servo drives, pneumatics, EtherNet/IP</div>
+      <div class="skill"><strong>Troubleshooting</strong>PLC diagnostics, electrical fault finding, sequence analysis, root-cause analysis</div>
+      <div class="skill"><strong>Delivery</strong>Commissioning, functional testing, production trials, customer acceptance</div>
+      <div class="skill"><strong>Documentation</strong>Schematics, technical manuals, backup management and traceability</div>
+    </div></section>
+
+    <section><h2>Experience</h2>
+      <div class="entry"><time>Sep 2025 — Present</time><div><h3>Automation Technician</h3><p class="company">Axiom Group Inc. · Aurora, Ontario</p><p>Troubleshoot injection-molding cells; modify Omron PLC logic, HMI parameters and sequences; work with Keyence vision, Wittmann robots and EOAT; support commissioning, I/O verification and production trials.</p></div></div>
+      <div class="entry"><time>Sep 2022 — Aug 2023</time><div><h3>Application Engineer</h3><p class="company">Viraj Electromech · India</p><p>Developed PLC programs and HMI screens; integrated PLCs, robots, vision, servo drives, VFDs and networks; supported startup, testing and customer acceptance.</p></div></div>
+      <div class="entry"><time>Aug 2021 — Aug 2022</time><div><h3>Service Engineer</h3><p class="company">Viraj Electromech · India</p><p>Diagnosed PLC machinery using software, schematics, multimeters and oscilloscopes; supported breakdowns, maintenance, commissioning and I/O checks.</p></div></div>
+      <div class="entry"><time>Nov 2020 — Aug 2021</time><div><h3>Panel Assembler</h3><p class="company">Viraj Electromech · India</p><p>Built and wired industrial control panels and completed wiring verification, electrical checks and functional testing.</p></div></div>
+    </section>
+
+    <section><h2>Selected Work</h2><div class="projects">
+      <div class="project"><h3>Multi-Camera Vision Inspection Upgrade</h3><p>Reviewed PLC logic, created vision programs, updated inspection-result mapping and validated the end-to-end inspection workflow.</p></div>
+      <div class="project"><h3>Automation Backup Manager</h3><p>Built a traceable workflow for PLC, HMI, robot and vision backups with standardized naming, history, monthly coverage and SHA-256 verification.</p></div>
+    </div></section>
+
+    <section class="education"><h2>Education</h2>
+      <div class="entry"><time>2024 — 2025</time><div><h3>Advanced Diploma, Electro-Mechanical Engineering Technology: Automation and Robotics</h3><p class="company">Centennial College · Toronto, Ontario</p></div></div>
+      <div class="entry"><time>2017 — 2020</time><div><h3>Bachelor of Electrical Engineering</h3><p class="company">Gujarat Technological University · India</p></div></div>
+      <div class="entry"><time>2014 — 2017</time><div><h3>Diploma in Electrical Engineering</h3><p class="company">Gujarat Technological University · India</p></div></div>
+    </section>
+  </main>
+  <button class="print" type="button" onclick="window.print()">Download / Print PDF</button>
+</body>
+</html>
