@@ -4,18 +4,15 @@
   var content = window.PORTFOLIO_CONTENT;
   var reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-  function schematic(type) {
-    if (type === "vision") {
-      return '<div class="schematic" aria-label="Vision inspection signal diagram"><svg viewBox="0 0 620 340" role="img"><title>Multi-camera inspection workflow</title><g fill="none" stroke="currentColor" stroke-width="2"><rect x="48" y="98" width="128" height="144"/><rect x="246" y="52" width="128" height="92"/><rect x="246" y="196" width="128" height="92"/><rect x="444" y="98" width="128" height="144"/><path d="M176 170H222M222 170V98H246M222 170V242H246M374 98H412V170H444M374 242H412V170" stroke="#f06414"/><circle cx="112" cy="170" r="29"/><circle cx="508" cy="170" r="29"/></g><g fill="currentColor" font-family="DM Mono" font-size="13" text-anchor="middle"><text x="112" y="174">PART</text><text x="310" y="105">CAMERA 01</text><text x="310" y="249">CAMERA 02</text><text x="508" y="174">PLC</text></g><g fill="#f06414"><circle cx="222" cy="170" r="6"/><circle cx="412" cy="170" r="6"/></g></svg></div>';
-    }
-    return '<div class="schematic" aria-label="Automation cell troubleshooting diagram"><svg viewBox="0 0 620 340" role="img"><title>Automation cell control layers</title><g fill="none" stroke="currentColor" stroke-width="2"><circle cx="310" cy="170" r="58"/><circle cx="310" cy="170" r="116" stroke-dasharray="7 8"/><path d="M310 54V24M310 316V286M194 170H74M546 170H426M228 88L168 30M392 252L452 312M228 252L168 312M392 88L452 30"/><rect x="20" y="143" width="90" height="54"/><rect x="510" y="143" width="90" height="54"/></g><g fill="currentColor" font-family="DM Mono" font-size="13" text-anchor="middle"><text x="310" y="174">PLC / HMI</text><text x="65" y="175">FIELD I/O</text><text x="555" y="175">MOTION</text><text x="310" y="20">VISION</text><text x="470" y="326">ROBOT</text><text x="150" y="326">EOAT</text><text x="150" y="24">SAFETY</text><text x="470" y="24">NETWORK</text></g><circle cx="310" cy="170" r="8" fill="#f06414"/></svg></div>';
-  }
-
   function projectVisual(project) {
-    if (project.visual !== "gallery") return schematic(project.visual);
+    if (!project.gallery || !project.gallery.length) return "";
     var first = project.gallery[0];
-    return '<div class="gallery" data-gallery><button type="button" class="gallery-open" aria-label="Open larger screenshot"><img class="gallery-main" src="' + first.src + '" alt="' + first.alt + '" loading="lazy"></button><div class="gallery-caption"><strong>' + first.title + '</strong><span>' + first.caption + '</span></div><div class="gallery-tabs" role="tablist" aria-label="Automation Backup Manager screens">' + project.gallery.map(function (image, index) {
-      return '<button type="button" role="tab" aria-selected="' + (index === 0 ? "true" : "false") + '" data-src="' + image.src + '" data-title="' + image.title + '" data-caption="' + image.caption + '" data-alt="' + image.alt + '">' + image.label + '</button>';
+    var flow = project.flow ? '<ol class="project-flow" aria-label="' + project.title + ' workflow">' + project.flow.map(function (step, index) {
+      return '<li><span class="mono">' + String(index + 1).padStart(2, "0") + '</span><strong>' + step + '</strong></li>';
+    }).join("") + '</ol>' : "";
+    var tabClass = project.gallery.length % 2 ? " gallery-tabs-odd" : "";
+    return flow + '<div class="gallery" data-gallery><button type="button" class="gallery-open" aria-label="Open larger image: ' + first.title + '"><img class="gallery-main" src="' + first.src + '" alt="' + first.alt + '" loading="lazy" decoding="async"></button><div class="gallery-caption"><strong>' + first.title + '</strong><span>' + first.caption + '</span></div><div class="gallery-tabs' + tabClass + '" role="tablist" aria-label="' + project.title + ' images" style="--gallery-count:' + project.gallery.length + '">' + project.gallery.map(function (image, index) {
+      return '<button type="button" role="tab" aria-selected="' + (index === 0 ? "true" : "false") + '" data-src="' + image.src + '" data-title="' + image.title + '" data-caption="' + image.caption + '" data-alt="' + image.alt + '"><span class="mono">' + String(index + 1).padStart(2, "0") + '</span>' + image.label + '</button>';
     }).join("") + '</div></div>';
   }
 
@@ -98,6 +95,7 @@
       mainImage.alt = tab.dataset.alt;
       title.textContent = tab.dataset.title;
       caption.textContent = tab.dataset.caption;
+      gallery.querySelector(".gallery-open").setAttribute("aria-label", "Open larger image: " + tab.dataset.title);
     }
     tabs.forEach(function (tab, index) {
       tab.addEventListener("click", function () { selectTab(tab); });

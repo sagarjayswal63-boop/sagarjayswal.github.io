@@ -19,7 +19,13 @@ window.PORTFOLIO_CONTENT = {
         "Teach robot positions and support EOAT, pneumatic gripper and vacuum changes.",
         "Complete I/O checks, functional testing and production trials."
       ],
-      visual: "cell"
+      visual: "gallery",
+      flow: ["Fault reported", "Trace signal", "Correct cause", "Validate production"],
+      gallery: [
+        { src: "assets/images/cell-hmi-alarm-diagnostics.jpg", label: "Diagnose", title: "Alarm-Led Diagnosis", caption: "Use HMI history to identify recurring faults and sequence conditions", alt: "Industrial HMI alarm history used during automation troubleshooting" },
+        { src: "assets/images/cell-eoat-sensor-array.jpg", label: "Trace", title: "Field-Level Verification", caption: "Trace sensors, pneumatic circuits and EOAT feedback at the machine", alt: "Industrial end-of-arm tooling with sensors, cables and pneumatic lines" },
+        { src: "assets/images/cell-control-cabinet.jpg", label: "Control", title: "Control-Layer Inspection", caption: "Verify PLC, drive, network and I/O status inside the control cabinet", alt: "Industrial electrical control cabinet containing PLC, drives, terminals and relays" }
+      ]
     },
     {
       id: "vision-upgrade",
@@ -35,7 +41,12 @@ window.PORTFOLIO_CONTENT = {
         "Updated camera-result mapping between the vision system and PLC.",
         "Performed end-to-end testing and troubleshooting before release."
       ],
-      visual: "vision"
+      visual: "gallery",
+      flow: ["Trigger part", "Capture image", "Map result", "Pass or reject"],
+      gallery: [
+        { src: "assets/images/vision-camera-ring-light.jpg", label: "Capture", title: "Controlled Image Capture", caption: "Camera and ring illumination establish repeatable inspection conditions", alt: "Industrial vision camera centered inside a circular ring light" },
+        { src: "assets/images/vision-inspection-interface.jpg", label: "Validate", title: "Inspection Validation", caption: "Configured tools verify features before results return to the PLC", alt: "Machine-vision inspection software displaying passing inspection tools" }
+      ]
     },
     {
       id: "backup-manager",
