@@ -4,75 +4,161 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="robots" content="noindex">
-  <title>Sagar Jayswal — Automation & Controls Resume</title>
+  <title>Sagar Jayswal — Automation &amp; Controls Resume</title>
   <style>
-    :root { --ink:#151618; --muted:#55585d; --orange:#db570d; --line:#d6d6d2; }
+    :root { --navy:#183653; --ink:#28323c; --muted:#5d6a77; --line:#9fb3c5; --band:#e8eef4; --paper:#fff; }
     * { box-sizing:border-box; }
-    body { margin:0; color:var(--ink); background:#e8e8e5; font:10.5pt/1.42 Arial,sans-serif; }
-    main { width:210mm; min-height:297mm; margin:20px auto; padding:15mm 16mm; background:#fff; box-shadow:0 16px 55px rgba(0,0,0,.14); }
-    header { display:grid; grid-template-columns:1fr auto; gap:20px; padding-bottom:12px; border-bottom:3px solid var(--ink); }
-    h1 { margin:0; font-size:30pt; line-height:.95; letter-spacing:-1.5px; text-transform:uppercase; }
-    .role { margin:7px 0 0; color:var(--orange); font-size:12pt; font-weight:700; }
-    .contact { display:grid; align-content:start; gap:4px; text-align:right; font-size:9pt; }
-    .contact a { color:inherit; text-decoration:none; }
+    html { background:#e7eaed; }
+    body { margin:0; color:var(--ink); background:#e7eaed; font:10.15pt/1.3 Arial,Helvetica,sans-serif; }
+    a { color:inherit; text-decoration:none; }
+    .page { width:8.5in; height:10.98in; margin:22px auto; padding:.46in .55in .42in; overflow:hidden; background:var(--paper); box-shadow:0 15px 48px rgba(25,45,65,.16); }
+    .page + .page { break-before:page; }
+    .resume-header { text-align:center; padding-bottom:10px; border-bottom:3px solid var(--navy); }
+    h1 { margin:0; color:var(--navy); font-size:25pt; line-height:1; letter-spacing:5.5px; text-transform:uppercase; }
+    .headline { margin:7px 0 0; color:var(--navy); font-size:10pt; font-weight:700; letter-spacing:1.4px; text-transform:uppercase; }
+    .contact { display:flex; flex-wrap:wrap; justify-content:center; gap:4px 9px; margin-top:8px; color:var(--muted); font-size:8.4pt; }
+    .contact span:not(:last-child)::after,.contact a:not(:last-child)::after { content:"│"; margin-left:9px; color:var(--line); }
+    .compact-header { display:flex; align-items:baseline; justify-content:space-between; gap:20px; padding-bottom:8px; border-bottom:3px solid var(--navy); }
+    .compact-header h1 { font-size:16pt; letter-spacing:3px; }
+    .compact-header p { margin:0; color:var(--muted); font-size:8.2pt; }
     section { margin-top:13px; }
-    h2 { margin:0 0 7px; font-size:10pt; letter-spacing:1.4px; text-transform:uppercase; color:var(--orange); }
+    h2 { display:flex; align-items:center; gap:10px; margin:0 0 7px; color:var(--navy); font-size:9.8pt; line-height:1; letter-spacing:2px; text-transform:uppercase; }
+    h2::after { content:""; flex:1; height:1px; background:var(--line); }
     p { margin:0; }
-    .summary { font-size:10.5pt; }
-    .skills { display:grid; grid-template-columns:repeat(3,1fr); gap:8px 14px; }
-    .skill { padding-top:5px; border-top:1px solid var(--line); }
-    .skill strong { display:block; margin-bottom:2px; }
-    .entry { display:grid; grid-template-columns:130px 1fr; gap:14px; padding:7px 0; border-top:1px solid var(--line); }
-    .entry time { color:var(--muted); font-size:9pt; }
-    h3 { margin:0; font-size:11pt; }
-    .company { margin:1px 0 3px; color:var(--muted); font-size:9.5pt; }
-    ul { margin:3px 0 0; padding-left:17px; }
-    li { margin:1px 0; }
-    .projects { display:grid; grid-template-columns:1fr 1fr; gap:10px 20px; }
-    .project { padding-top:6px; border-top:1px solid var(--line); }
-    .project p { margin-top:3px; font-size:9.5pt; }
-    .education .entry { padding:5px 0; }
-    .print { position:fixed; right:22px; bottom:22px; border:0; padding:12px 16px; background:var(--orange); color:#fff; font-weight:700; cursor:pointer; }
-    @page { size:A4; margin:0; }
-    @media print { body { background:#fff; } main { margin:0; box-shadow:none; } .print { display:none; } }
-    @media (max-width:800px) { main { width:100%; min-height:0; margin:0; padding:24px 20px; } header { grid-template-columns:1fr; } .contact { text-align:left; } .skills,.projects { grid-template-columns:1fr; } .entry { grid-template-columns:1fr; gap:2px; } }
+    .summary { font-size:9.5pt; line-height:1.38; }
+    .skills { display:grid; grid-template-columns:112px 1fr; gap:4px 11px; font-size:9.1pt; line-height:1.28; }
+    .skills dt { color:var(--navy); font-weight:700; }
+    .skills dd { margin:0; }
+    .company-band { display:flex; justify-content:space-between; gap:20px; margin:8px -2px 6px; padding:3px 8px 3px 9px; border-left:3px solid var(--navy); background:var(--band); color:var(--navy); font-size:9pt; font-weight:700; }
+    .company-band time { white-space:nowrap; font-size:8.2pt; }
+    .role-row { display:flex; align-items:baseline; justify-content:space-between; gap:20px; margin:0 0 2px 11px; }
+    h3 { margin:0; color:#354656; font-size:9.2pt; }
+    .role-row time { color:var(--muted); font-size:8pt; font-style:italic; white-space:nowrap; }
+    ul { margin:3px 0 7px 24px; padding-left:12px; }
+    li { margin:2px 0; padding-left:1px; }
+    li::marker { color:#70879c; }
+    .project { margin-top:7px; padding-left:10px; border-left:3px solid var(--line); }
+    .project h3 { color:var(--navy); }
+    .project p { margin-top:2px; font-size:9.2pt; line-height:1.34; }
+    .project-meta { color:var(--muted); font-size:8.1pt; }
+    .education-item { display:grid; grid-template-columns:1fr auto; gap:8px 18px; margin-top:9px; }
+    .education-item h3 { color:var(--navy); }
+    .education-item p { margin-top:2px; color:var(--muted); font-size:8.7pt; }
+    .education-item time { color:var(--muted); font-size:8pt; font-style:italic; white-space:nowrap; }
+    .strengths { display:grid; grid-template-columns:repeat(2,1fr); gap:5px 22px; margin:0; padding:0; list-style:none; }
+    .strengths li { position:relative; margin:0; padding:5px 0 5px 13px; border-top:1px solid #ccd6df; }
+    .strengths li::before { content:""; position:absolute; left:0; top:10px; width:5px; height:5px; background:var(--navy); }
+    .print { position:fixed; right:22px; bottom:22px; border:0; padding:12px 16px; background:var(--navy); color:#fff; font-weight:700; cursor:pointer; }
+    @page { size:Letter; margin:0; }
+    @media print { html,body { background:#fff; } .page { margin:0; box-shadow:none; } .print { display:none; } }
+    @media screen and (max-width:850px) { .page { width:100%; height:auto; min-height:100vh; margin:0; padding:28px 22px; overflow:visible; box-shadow:none; } .page + .page { margin-top:16px; } .contact { line-height:1.7; } .compact-header { display:block; } .compact-header p { margin-top:5px; } .strengths { grid-template-columns:1fr; } }
   </style>
 </head>
 <body>
   <main>
-    <header>
-      <div><h1>Sagar Jayswal</h1><p class="role">Automation &amp; Controls Technician</p></div>
-      <div class="contact"><span>Scarborough, Ontario</span><a href="mailto:sagarjayswal63@gmail.com">sagarjayswal63@gmail.com</a><a href="https://www.linkedin.com/in/sagar-jayswal">linkedin.com/in/sagar-jayswal</a></div>
-    </header>
+    <article class="page">
+      <header class="resume-header">
+        <h1>Sagar Jayswal</h1>
+        <p class="headline">Automation &amp; Controls Technician</p>
+        <div class="contact">
+          <a href="tel:+14379620400">437-962-0400</a>
+          <a href="mailto:sagarjayswal63@gmail.com">sagarjayswal63@gmail.com</a>
+          <a href="https://www.linkedin.com/in/sagar-jayswal">linkedin.com/in/sagar-jayswal</a>
+          <span>Scarborough, Ontario</span>
+          <a href="https://sagarjayswal63-boop.github.io/sagarjayswal.github.io/">Portfolio</a>
+        </div>
+      </header>
 
-    <section><h2>Profile</h2><p class="summary">Automation technician with hands-on experience programming, commissioning and troubleshooting PLC-controlled equipment. Works across control panels, PLC/HMI logic, machine vision, robotics, pneumatics, industrial communication and production support, with a methodical focus on safe and maintainable solutions.</p></section>
+      <section>
+        <h2>Professional Summary</h2>
+        <p class="summary">Automation and controls professional with 4+ years of experience programming, commissioning and troubleshooting PLC-controlled manufacturing systems. Hands-on with Omron, Siemens and Allen-Bradley platforms, HMIs, industrial robotics, machine vision, motion, pneumatics, hydraulics and industrial networks. Known for structured fault isolation, safe commissioning, clear documentation and production-focused improvements.</p>
+      </section>
 
-    <section><h2>Technical Skills</h2><div class="skills">
-      <div class="skill"><strong>PLC &amp; HMI</strong>Omron Sysmac Studio, CX-Programmer, Siemens TIA Portal, Allen-Bradley Studio 5000</div>
-      <div class="skill"><strong>Vision &amp; Robotics</strong>Keyence IV2/IV3, camera-to-PLC interfacing, Wittmann robot teaching, EOAT</div>
-      <div class="skill"><strong>Field Systems</strong>I/O verification, sensors, VFDs, servo drives, pneumatics, EtherNet/IP</div>
-      <div class="skill"><strong>Troubleshooting</strong>PLC diagnostics, electrical fault finding, sequence analysis, root-cause analysis</div>
-      <div class="skill"><strong>Delivery</strong>Commissioning, functional testing, production trials, customer acceptance</div>
-      <div class="skill"><strong>Documentation</strong>Schematics, technical manuals, backup management and traceability</div>
-    </div></section>
+      <section>
+        <h2>Technical Skills</h2>
+        <dl class="skills">
+          <dt>PLC</dt><dd>Omron Sysmac Studio, CX-Programmer, Siemens TIA Portal / S7-1200, Allen-Bradley Studio 5000</dd>
+          <dt>HMI</dt><dd>Omron NB, Siemens HMI, FactoryTalk View, alarm diagnostics and parameter management</dd>
+          <dt>Automation</dt><dd>PLC programming, HMI development, commissioning, industrial networking, EtherNet/IP, root-cause analysis</dd>
+          <dt>Robotics &amp; Vision</dt><dd>Wittmann robots, Keyence IV2/IV3, camera setup, result mapping, sensor integration and EOAT</dd>
+          <dt>Motion &amp; Field</dt><dd>Servo drives, VFDs, pneumatics, hydraulics, I/O verification, sensors and actuators</dd>
+          <dt>Electrical</dt><dd>Control panels, schematics, instrumentation, multimeters, oscilloscopes and wiring verification</dd>
+          <dt>Standards</dt><dd>ISO 9001, ISO 14001, ISO 45001 and IATF 16949 manufacturing environments</dd>
+        </dl>
+      </section>
 
-    <section><h2>Experience</h2>
-      <div class="entry"><time>Sep 2025 — Present</time><div><h3>Automation Technician</h3><p class="company">Axiom Group Inc. · Aurora, Ontario</p><p>Troubleshoot injection-molding cells; modify Omron PLC logic, HMI parameters and sequences; work with Keyence vision, Wittmann robots and EOAT; support commissioning, I/O verification and production trials.</p></div></div>
-      <div class="entry"><time>Sep 2022 — Aug 2023</time><div><h3>Application Engineer</h3><p class="company">Viraj Electromech · India</p><p>Developed PLC programs and HMI screens; integrated PLCs, robots, vision, servo drives, VFDs and networks; supported startup, testing and customer acceptance.</p></div></div>
-      <div class="entry"><time>Aug 2021 — Aug 2022</time><div><h3>Service Engineer</h3><p class="company">Viraj Electromech · India</p><p>Diagnosed PLC machinery using software, schematics, multimeters and oscilloscopes; supported breakdowns, maintenance, commissioning and I/O checks.</p></div></div>
-      <div class="entry"><time>Nov 2020 — Aug 2021</time><div><h3>Panel Assembler</h3><p class="company">Viraj Electromech · India</p><p>Built and wired industrial control panels and completed wiring verification, electrical checks and functional testing.</p></div></div>
-    </section>
+      <section>
+        <h2>Professional Experience</h2>
+        <div class="company-band"><span>Axiom Group Inc.</span><time>Sep 2025 — Present</time></div>
+        <div class="role-row"><h3>Automation Technician</h3><span></span></div>
+        <ul>
+          <li>Troubleshoot PLC-controlled injection-molding cells and downstream equipment across electrical, mechanical, pneumatic, hydraulic and controls systems.</li>
+          <li>Modify Omron PLC logic, HMI parameters, machine sequences, vision settings and sensor configurations after systematic verification.</li>
+          <li>Support Keyence IV2/IV3 vision systems, Wittmann robot position teaching, EOAT changes, label printers and industrial communications.</li>
+          <li>Perform root-cause analysis, I/O checks and corrective actions to restore production and prevent recurring automation faults.</li>
+          <li>Commission automation improvements and validate safety conditions, machine sequences and first-pass readiness through production trials.</li>
+        </ul>
 
-    <section><h2>Selected Work</h2><div class="projects">
-      <div class="project"><h3>Multi-Camera Vision Inspection Upgrade</h3><p>Reviewed PLC logic, created vision programs, updated inspection-result mapping and validated the end-to-end inspection workflow.</p></div>
-      <div class="project"><h3>Automation Backup Manager</h3><p>Built a traceable workflow for PLC, HMI, robot and vision backups with standardized naming, history, monthly coverage and SHA-256 verification.</p></div>
-    </div></section>
+        <div class="company-band"><span>Viraj Electromech</span><time>Nov 2020 — Aug 2023</time></div>
+        <div class="role-row"><h3>Application Engineer</h3><time>Sep 2022 — Aug 2023</time></div>
+        <ul>
+          <li>Developed and commissioned PLC software using Siemens S7-1200, Allen-Bradley Studio 5000 and Omron platforms.</li>
+          <li>Designed HMI applications for diagnostics, alarms and machine operation, improving operator visibility during production and service.</li>
+          <li>Integrated PLCs with robots, vision systems, servo drives, VFDs and industrial networks across complete automation projects.</li>
+          <li>Executed startup, debugging, I/O verification, functional testing and customer acceptance for automated equipment.</li>
+          <li>Prepared technical documentation and refined control sequences to improve maintainability and commissioning efficiency.</li>
+        </ul>
+      </section>
+    </article>
 
-    <section class="education"><h2>Education</h2>
-      <div class="entry"><time>2024 — 2025</time><div><h3>Advanced Diploma, Electro-Mechanical Engineering Technology: Automation and Robotics</h3><p class="company">Centennial College · Toronto, Ontario</p></div></div>
-      <div class="entry"><time>2017 — 2020</time><div><h3>Bachelor of Electrical Engineering</h3><p class="company">Gujarat Technological University · India</p></div></div>
-      <div class="entry"><time>2014 — 2017</time><div><h3>Diploma in Electrical Engineering</h3><p class="company">Gujarat Technological University · India</p></div></div>
-    </section>
+    <article class="page">
+      <header class="compact-header">
+        <h1>Sagar Jayswal</h1>
+        <p>Automation &amp; Controls Technician · Scarborough, Ontario</p>
+      </header>
+
+      <section>
+        <h2>Professional Experience — Continued</h2>
+        <div class="company-band"><span>Viraj Electromech</span><time>Nov 2020 — Aug 2023</time></div>
+        <div class="role-row"><h3>Service Engineer</h3><time>Aug 2021 — Aug 2022</time></div>
+        <ul>
+          <li>Troubleshot PLC-controlled industrial machinery and electrical control panels, restoring equipment during breakdowns and service calls.</li>
+          <li>Used PLC diagnostics, electrical drawings, multimeters and oscilloscopes to isolate electrical, controls and communication faults.</li>
+          <li>Performed preventive and corrective maintenance and supported customers during urgent equipment failures.</li>
+          <li>Supported installation, commissioning and testing by verifying I/O signals, sensors, actuators, interlocks and machine sequences.</li>
+        </ul>
+
+        <div class="role-row"><h3>Panel Assembler</h3><time>Nov 2020 — Aug 2021</time></div>
+        <ul>
+          <li>Built and wired industrial control panels from electrical schematics, including PLC hardware, relays, terminals and power supplies.</li>
+          <li>Installed and labeled industrial control devices and completed point-to-point wiring verification.</li>
+          <li>Performed electrical checks and functional testing before panels were released for machine integration and commissioning.</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>Selected Technical Projects</h2>
+        <div class="project"><h3>Multi-Camera Vision Inspection Upgrade</h3><p>Reviewed the existing PLC sequence, created and configured new inspection programs, updated camera-result mapping and validated pass/reject handling through end-to-end testing.</p><p class="project-meta">Machine vision · PLC ladder · Result mapping · Inspection logic</p></div>
+        <div class="project"><h3>Automation Backup Manager</h3><p>Built a desktop workflow for PLC, HMI, robot, fixture and vision backups with standardized naming, searchable history, monthly coverage and SHA-256 package verification.</p><p class="project-meta">Desktop application · Traceability · SHA-256 · Maintenance workflow</p></div>
+      </section>
+
+      <section>
+        <h2>Core Working Practices</h2>
+        <ul class="strengths">
+          <li>Structured fault isolation from field device to PLC and machine response</li>
+          <li>Safe sequence changes followed by functional verification</li>
+          <li>Clear maintenance documentation and backup discipline</li>
+          <li>Cross-functional support with engineering, production and maintenance</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>Education</h2>
+        <div class="education-item"><div><h3>Advanced Diploma, Electro-Mechanical Engineering Technology: Automation and Robotics</h3><p>Centennial College · Toronto, Ontario</p></div><time>Jan 2024 — Apr 2025</time></div>
+        <div class="education-item"><div><h3>Bachelor of Electrical Engineering</h3><p>Gujarat Technological University · India</p></div><time>Aug 2017 — Sep 2020</time></div>
+        <div class="education-item"><div><h3>Diploma in Electrical Engineering</h3><p>Gujarat Technological University · India</p></div><time>Aug 2014 — Jun 2017</time></div>
+      </section>
+    </article>
   </main>
   <button class="print" type="button" onclick="window.print()">Download / Print PDF</button>
 </body>
