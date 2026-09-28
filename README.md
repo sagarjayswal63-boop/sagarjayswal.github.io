@@ -33,6 +33,10 @@ The contact form uses FormSubmit and sends to `sagarjayswal63@gmail.com`. FormSu
 
 Google Analytics 4 is enabled in `index.html` with measurement ID `G-KVPM9TKRYQ`. Traffic appears in the Google Analytics Realtime report shortly after the published site is visited; standard reports can take longer to populate. Visits to local files or unpublished changes are not meaningful production traffic.
 
+## Social preview
+
+LinkedIn and other social platforms use `assets/images/sagar-jayswal-social-preview.png` through the Open Graph and Twitter Card metadata in `index.html`. The image is 1200 × 630 pixels. Social platforms may continue showing a cached older image until their link-preview cache is refreshed.
+
 ## Publishing
 
 GitHub Pages publishes the `main` branch of this repository.
