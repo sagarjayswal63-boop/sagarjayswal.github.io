@@ -29,6 +29,10 @@ On the original Windows development machine, the PDF can be regenerated with Mic
 
 The contact form uses FormSubmit and sends to `sagarjayswal63@gmail.com`. FormSubmit may send a one-time activation email after the first submission. That activation email must be accepted before normal delivery begins.
 
+## Analytics
+
+Google Analytics 4 is enabled in `index.html` with measurement ID `G-KVPM9TKRYQ`. Traffic appears in the Google Analytics Realtime report shortly after the published site is visited; standard reports can take longer to populate. Visits to local files or unpublished changes are not meaningful production traffic.
+
 ## Publishing
 
 GitHub Pages publishes the `main` branch of this repository.
