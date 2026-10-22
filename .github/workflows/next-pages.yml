@@ -35,10 +35,6 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
-      - name: Use the custom static-export workflow for Pages
-        env:
-          GH_TOKEN: ${{ github.token }}
-        run: gh api --method PUT "repos/${GITHUB_REPOSITORY}/pages" -f build_type=workflow > /dev/null
       - uses: actions/configure-pages@v5
       - name: Deploy static export
         id: deployment

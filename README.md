@@ -116,11 +116,12 @@ represented as issuer verification. Test fixtures exist only in unit tests.
 
 `.github/workflows/next-pages.yml` runs frozen dependency installation, unit
 tests, type checking and the static build on `main`. It uploads **only `out/`**,
-switches the existing Pages build type to GitHub Actions using a Pages-scoped
-workflow token, then deploys the artifact. No Next server or secret-dependent
-runtime is needed. If repository policy denies the Pages setting update, the
-maintainer must select GitHub Actions in Settings → Pages; the workflow reports
-the error rather than silently deploying the old root HTML.
+uses the existing Pages configuration and a Pages-scoped workflow token to
+deploy the artifact. No Next server or secret-dependent
+runtime is needed. The workflow does not attempt an administrative Pages-setting change. If
+repository policy requires a custom-workflow source before accepting the
+deployment, select GitHub Actions in Settings → Pages. The workflow reports
+failed deployments rather than claiming the old root HTML is the Next app.
 
 ## Validation and limitations
 
