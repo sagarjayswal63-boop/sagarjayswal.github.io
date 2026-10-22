@@ -2,11 +2,11 @@
   "projects": [
     {
       "id": "cell-troubleshooting",
-      "year": "2025 \u2014 Present",
+      "year": "2025 — Present",
       "title": "Injection-Molding Cell Troubleshooting",
       "summary": "Production support across PLC, vision, robot, sensor and pneumatic layers.",
       "challenge": "Isolate faults across interconnected PLC, HMI, vision, robot, sensor and pneumatic systems during production support.",
-      "description": "Troubleshoot PLC-controlled injection-molding cells and downstream equipment at Axiom Group. The work follows the complete signal path\u2014from field device and I/O through logic, HMI, robot motion and final machine response.",
+      "description": "Troubleshoot PLC-controlled injection-molding cells and downstream equipment at Axiom Group. The work follows the complete signal path—from field device and I/O through logic, HMI, robot motion and final machine response.",
       "outcome": "Supported reliable production recovery, commissioning, I/O verification and controlled sequence changes in live manufacturing environments.",
       "tags": [
         "Omron PLC",
@@ -154,11 +154,90 @@
           "alt": "Automation Backup Manager storage overview"
         }
       ]
+    },
+    {
+      "id": "screw-assembly",
+      "year": "2026",
+      "title": "Screw Assembly Controller & PLC Integration",
+      "summary": "Verified batch completion connects a 14-fastener assembly process to fixture release.",
+      "challenge": "Prevent false fixture completion when reverse and retightening operations make a PLC screw count insufficient to verify the finished batch.",
+      "description": "Integrated a Delta Regis CESL824F-ESD screwdriver and BECT832-SSO controller with an Omron CP1H PLC. Connected OK, NG and batch-complete feedback, captured the short completion pulse, and coordinated fixture release with operator status indication.",
+      "outcome": "Completed and tested the PLC modification so fixture release requires the controller’s batch-complete confirmation rather than the PLC count alone.",
+      "tags": [
+        "Omron CP1H",
+        "CX-Programmer",
+        "Delta Regis",
+        "Batch verification",
+        "Banner K50"
+      ],
+      "points": [
+        "Connected controller OK, NG and batch-complete signals to the PLC.",
+        "Captured and retained the short batch-complete pulse for sequence control.",
+        "Addressed false completion associated with reverse and retightening operations.",
+        "Integrated a Banner K50 indicator for operator feedback.",
+        "Tested completion, reset and part-removal conditions."
+      ],
+      "visual": "gallery",
+      "flow": [
+        "Fasten part",
+        "Verify batch",
+        "Latch completion",
+        "Release fixture"
+      ],
+      "gallery": [
+        {
+          "src": "assets/images/screw-assembly-workflow.svg",
+          "label": "Sequence",
+          "title": "Verified Batch Completion",
+          "caption": "Functional sequence overview: the controller confirms the batch before the PLC permits fixture release.",
+          "alt": "Sequence diagram showing screwdriver feedback, controller batch confirmation, PLC completion latch and fixture release."
+        }
+      ]
+    },
+    {
+      "id": "fixture-plc-hmi-integration",
+      "year": "2026",
+      "title": "Multi-Model Fixture PLC & HMI Integration",
+      "summary": "Two fixture programs consolidated across sequences, HMI, vision inspection and label printing.",
+      "challenge": "Combine regular production models and screw-station models within one PLC application while resolving address conflicts and limited program memory.",
+      "description": "Combined two existing fixture programs on an Omron CJ2M-CPU31. Integrated model-specific sequences, screw-station controls, torque-completion checks, process interlocks, Omron NB10W HMI screens, Keyence vision inspection and industrial label printing.",
+      "outcome": "Created a consolidated PLC/HMI application and completed production-function testing on selected models, with further model verification performed in stages.",
+      "tags": [
+        "Omron CJ2M",
+        "CX-Programmer",
+        "NB-Designer",
+        "Keyence IV2 / IV3",
+        "Label printing"
+      ],
+      "points": [
+        "Integrated model-specific sequences, torque checks and process interlocks.",
+        "Updated HMI screens, addresses, status indications and alarm messages.",
+        "Verified camera selection and inspection-result mapping between vision systems and the PLC.",
+        "Updated label-printing commands and print conditions.",
+        "Resolved overlapping addresses and optimized the program to fit available PLC memory.",
+        "Tested individual model sequences and troubleshot interactions between inspection, printing and fixture controls."
+      ],
+      "visual": "gallery",
+      "flow": [
+        "Review programs",
+        "Integrate controls",
+        "Resolve conflicts",
+        "Test each model"
+      ],
+      "gallery": [
+        {
+          "src": "assets/images/fixture-integration-workflow.svg",
+          "label": "Integration",
+          "title": "Consolidated Fixture Controls",
+          "caption": "Integration overview covering PLC sequences, operator interface, vision feedback and print conditions.",
+          "alt": "Integration diagram showing model-specific PLC sequences connected with HMI, vision inspection and label printing, followed by model testing."
+        }
+      ]
     }
   ],
   "experience": [
     {
-      "date": "Sep 2025 \u2014 Present",
+      "date": "Sep 2025 — Present",
       "current": true,
       "role": "Automation Technician",
       "company": "Axiom Group Inc. / Aurora, ON",
@@ -172,7 +251,7 @@
       ]
     },
     {
-      "date": "Sep 2022 \u2014 Aug 2023",
+      "date": "Sep 2022 — Aug 2023",
       "role": "Application Engineer",
       "company": "Viraj Electromech / India",
       "detail": "Developed PLC programs and HMI screens; integrated PLCs, robots, vision, servo drives, VFDs and networks; supported startup, testing and customer acceptance.",
@@ -185,7 +264,7 @@
       ]
     },
     {
-      "date": "Aug 2021 \u2014 Aug 2022",
+      "date": "Aug 2021 — Aug 2022",
       "role": "Service Engineer",
       "company": "Viraj Electromech / India",
       "detail": "Provided technical service and troubleshooting of PLC machinery using diagnostics, schematics, multimeters and oscilloscopes; supported breakdowns, maintenance, commissioning and I/O checks.",
@@ -197,7 +276,7 @@
       ]
     },
     {
-      "date": "Nov 2020 \u2014 Aug 2021",
+      "date": "Nov 2020 — Aug 2021",
       "role": "Panel Assembler",
       "company": "Viraj Electromech / India",
       "detail": "Built and wired control panels per schematics, including PLC hardware, relays, terminals and power supplies; completed wiring verification, electrical checks and functional testing.",
@@ -290,17 +369,17 @@
     {
       "credential": "Advanced Diploma, Electro-Mechanical Engineering Technology: Automation and Robotics",
       "school": "Centennial College / Toronto, ON",
-      "date": "Jan 2024 \u2014 Apr 2025"
+      "date": "Jan 2024 — Apr 2025"
     },
     {
       "credential": "Bachelor of Electrical Engineering",
       "school": "Gujarat Technological University / India",
-      "date": "Aug 2017 \u2014 Sep 2020"
+      "date": "Aug 2017 — Sep 2020"
     },
     {
       "credential": "Diploma in Electrical Engineering",
       "school": "Gujarat Technological University / India",
-      "date": "Aug 2014 \u2014 Jun 2017"
+      "date": "Aug 2014 — Jun 2017"
     }
   ]
 }
