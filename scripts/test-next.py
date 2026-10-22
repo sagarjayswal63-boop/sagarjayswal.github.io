@@ -36,8 +36,19 @@ with TemporaryDirectory(prefix='portfolio-next-') as temporary:
             page.wait_for_function("document.querySelector('video').readyState >= 2")
             assert page.locator('video').get_attribute('preload') == 'auto'
             assert page.locator('video').evaluate('(v)=>v.paused && !v.autoplay && !v.loop && v.duration === 8')
+            # Observe actual decoded pixels and currentTime samples, not only targets.
+            page.evaluate("""() => {
+                window.scrubSamples = [];
+                const v = document.querySelector('video');
+                const sample = () => { window.scrubSamples.push(v.currentTime); if (window.scrubSamples.length < 120) requestAnimationFrame(sample); };
+                requestAnimationFrame(sample);
+                window.videoPixels = () => { const c = document.createElement('canvas'); c.width = 72; c.height = 128; c.getContext('2d').drawImage(v,0,0,72,128); return c.toDataURL(); };
+                window.firstPixels = window.videoPixels();
+            }""")
             page.mouse.move(1296, 250)
             page.wait_for_function("document.querySelector('video').currentTime>6", timeout=10000)
+            page.wait_for_function("!document.querySelector('video').seeking && window.videoPixels() !== window.firstPixels")
+            assert page.evaluate('new Set(window.scrubSamples.map(t=>t.toFixed(3))).size > 4'), 'No intermediate currentTime updates'
             page.mouse.move(144, 250)
             page.wait_for_function("document.querySelector('video').currentTime<1.1", timeout=10000)
             page.evaluate('window.scrollTo(0,(document.documentElement.scrollHeight-innerHeight)*.25)')
@@ -111,14 +122,25 @@ with TemporaryDirectory(prefix='portfolio-next-') as temporary:
                 fallback.on('request', lambda request: requests.append(request.url))
                 fallback.route('**/*', lambda route: route.continue_() if route.request.url.startswith(base) else route.abort())
                 fallback.goto(base, wait_until='networkidle')
-                assert fallback.locator('video').evaluate('(v)=>!v.hasAttribute("src")')
-                assert not any('.mp4' in url for url in requests), name
+                if name in ('reduced motion', 'data saver'):
+                    assert fallback.locator('video').evaluate('(v)=>!v.hasAttribute("src")')
+                    assert not any('.mp4' in url for url in requests), name
+                else:
+                    fallback.wait_for_function("document.querySelector('video').readyState >= 2")
+                    fallback.evaluate('window.scrollTo(0,(document.documentElement.scrollHeight-innerHeight)*.25)')
+                    fallback.wait_for_function("Math.abs(document.querySelector('video').currentTime-2)<.2")
+                    fallback.evaluate('window.scrollTo(0,0)')
+                    fallback.wait_for_function("document.querySelector('video').currentTime<.1")
+                    fallback.wait_for_function("!document.querySelector('video').cinematicState.scheduled")
+                    if name == 'constrained device':
+                        fallback.mouse.move(1100, 200)
+                        fallback.wait_for_function("document.querySelector('video').currentTime>6")
                 if name == 'touch':
                     fallback.locator('.menu-toggle').tap(); fallback.locator('#mobile-menu a[href="#work"]').tap()
                     fallback.locator('.project-summary').nth(1).tap(); assert fallback.locator('#panel-vision-upgrade').is_visible()
                     fallback.evaluate('window.scrollTo(0,0)'); fallback.screenshot(path='/tmp/next-portfolio-mobile.png')
                 fallback_context.close()
-                print('PASS:', name, 'poster fallback without MP4 requests', flush=True)
+                print('PASS:', name, 'fallback' if name in ('reduced motion', 'data saver') else 'forward/reverse scrubbing and idle RAF', flush=True)
             nojs = browser.new_context(java_script_enabled=False).new_page()
             nojs.route('**/*', lambda route: route.continue_() if route.request.url.startswith(base) else route.abort())
             nojs.goto(base, wait_until='domcontentloaded')

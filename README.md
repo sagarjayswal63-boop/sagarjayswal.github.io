@@ -88,11 +88,12 @@ metadata give a ~3.6 MB seek-friendly file. The previous video remains in the
 legacy assets for recovery; the app loads only this new video.
 
 The video has `muted`, `playsInline`, `preload="auto"`, no autoplay and no loop.
-A source is attached only on eligible desktops, so touch, reduced-motion,
-data-saver and constrained devices do not fetch the MP4. One RAF loop selects
+Cursor scrubbing works on pointer devices, and native scroll scrubbing works
+on desktop and touch devices, including four-core/low-memory hardware.
+Reduced-motion and data-saver preferences use the poster without fetching the MP4. One RAF loop selects
 the most recent cursor or document-scroll target, applies LERP 0.10, pauses
 and seeks after metadata, and catches transient seek errors. There is no
-`readyState >= 2` seek gate. One seek at a time and a 30Hz cap prevent redundant
+`readyState >= 2` seek gate. One seek at a time and a 20–30Hz cap prevent redundant
 decode work while retaining the requested .001-second threshold. It sleeps at
 rest and in hidden tabs. A visible motion control stops cinematic movement.
 
