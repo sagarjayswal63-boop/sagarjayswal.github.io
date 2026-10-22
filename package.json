@@ -7,7 +7,8 @@
     "build": "next build",
     "typecheck": "tsc --noEmit",
     "test": "node --import tsx --test tests/*.test.ts",
-    "serve": "python3 scripts/serve-next.py"
+    "serve": "python3 scripts/serve-next.py",
+    "publish:prepare": "npm run build && python3 scripts/sync-export.py"
   },
   "dependencies": {
     "@studio-freight/lenis": "1.0.42",

@@ -50,10 +50,13 @@ Next's dev server handles that prefix automatically.
 - `src/lib/certifications.ts`: certification schema and cylinder math.
 - `public/`: real project images, font licenses, résumé, poster and video.
 
-The root `index.html`, `assets/`, and earlier Python tests are retained as the
-previous static implementation for reference and recovery. They are **not**
-the Next app or its deployment artifact. Edit the typed app above. No project,
-previous employment date, education record, or résumé PDF was removed.
+The root `index.html`, `_next/`, `video/` and public assets are the **compiled
+Next.js snapshot** used by the existing main-branch Pages publisher. Do not edit
+the compiled HTML/chunks. Edit `src/` and `public/`, run `npm run publish:prepare`,
+and commit the source plus generated snapshot. `.static-export-source.sha256`
+lets CI detect a stale snapshot. The pre-migration static implementation is
+recoverable on `backup/pre-next-migration`; unrelated original `assets/` and
+older regression scripts remain for reference. No project or résumé was removed.
 
 ## Identity and evidence
 
@@ -114,14 +117,27 @@ represented as issuer verification. Test fixtures exist only in unit tests.
 
 ## Publishing
 
-`.github/workflows/next-pages.yml` runs frozen dependency installation, unit
-tests, type checking and the static build on `main`. It uploads **only `out/`**,
-uses the existing Pages configuration and a Pages-scoped workflow token to
-deploy the artifact. No Next server or secret-dependent
-runtime is needed. The workflow does not attempt an administrative Pages-setting change. If
-repository policy requires a custom-workflow source before accepting the
-deployment, select GitHub Actions in Settings → Pages. The workflow reports
-failed deployments rather than claiming the old root HTML is the Next app.
+The repository retains its existing Pages source: **main, root directory**.
+The initial workflow could build successfully but could not change the Pages
+setting; a later CI install stalled. Publication therefore uses a tested,
+checked-in static export instead of requiring administrative credentials.
+
+Before pushing an application update:
+
+```sh
+npm run publish:prepare
+python3 scripts/test-next.py
+python3 scripts/sync-export.py --check
+```
+
+Commit the updated source and generated root snapshot together. The export sync
+copies only known Next/public outputs and preserves unrelated original files.
+The existing GitHub Pages branch workflow publishes those static files.
+`.github/workflows/next-pages.yml` separately performs frozen installation,
+unit tests, type checking, build and snapshot freshness validation, and saves a
+build artifact. It has read-only repository permissions and bounded network
+retries/timeouts. No Next runtime server, admin setting change or application
+secret is required. Both source and generated files live in the existing repo.
 
 ## Validation and limitations
 
@@ -144,11 +160,3 @@ major before adding those capabilities. The dependency tree is not claimed to
 be vulnerability-free. Lenis uses the exact requested package name, whose
 maintainer has since renamed it to `lenis`.
 
-A guarded one-time recovery workflow can reuse the successful build artifact
-from run `39711028952` if registry installation is temporarily unavailable.
-It first verifies that all application, media and dependency source files still
-match the tested commit `127da95`, then downloads and republishes the untouched
-artifact through the normal Pages deployment action. It does not rebuild,
-change credentials, disable integrity/TLS checks, or publish stale application
-code. Future application changes use the normal build workflow; that workflow
-has bounded package-fetch retries and a ten-minute job timeout.

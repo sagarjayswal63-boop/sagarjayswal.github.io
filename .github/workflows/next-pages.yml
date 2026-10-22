@@ -1,4 +1,4 @@
-name: Build and deploy Next portfolio
+name: Validate Next static export
 on:
   push:
     branches: [main]
@@ -12,16 +12,15 @@ on:
       - 'tailwind.config.ts'
       - 'postcss.config.mjs'
       - 'tests/**'
+      - '.static-export-source.sha256'
   workflow_dispatch:
 permissions:
   contents: read
-  pages: write
-  id-token: write
 concurrency:
-  group: pages
+  group: next-validation
   cancel-in-progress: true
 jobs:
-  build:
+  validate:
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
@@ -36,18 +35,7 @@ jobs:
       - run: npm run build
         env:
           NEXT_TELEMETRY_DISABLED: '1'
+      - run: python3 scripts/sync-export.py --check
       - uses: actions/upload-pages-artifact@v3
         with:
           path: out
-  deploy:
-    needs: build
-    runs-on: ubuntu-latest
-    timeout-minutes: 10
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    steps:
-      - uses: actions/configure-pages@v5
-      - name: Deploy static export
-        id: deployment
-        uses: actions/deploy-pages@v4
