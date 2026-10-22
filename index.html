@@ -31,6 +31,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@75..125,400..900&family=DM+Mono:wght@400;500&family=Playfair+Display:ital,wght@1,500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/css/styles.css">
+  <noscript><style>.menu-toggle { display: none; } .header-resume { display: block; }</style></noscript>
   <title>Sagar Jayswal — Automation & Controls Technician</title>
   <script type="application/ld+json">
   {
@@ -56,12 +57,12 @@
     <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="mobile-menu">Menu</button>
   </header>
 
-  <div class="mobile-menu" id="mobile-menu" aria-hidden="true">
+  <div class="mobile-menu" id="mobile-menu" aria-hidden="true" inert>
     <button class="menu-close" type="button" aria-label="Close menu">Close</button>
     <nav aria-label="Mobile navigation"><a href="#work"><span>01</span>Work</a><a href="#experience"><span>02</span>Experience</a><a href="#capabilities"><span>03</span>Capabilities</a><a href="#contact"><span>04</span>Contact</a><a href="assets/Sagar-Jayswal-Automation-Resume.pdf" download><span>05</span>Résumé</a></nav>
   </div>
 
-  <main id="main">
+  <main id="main" tabindex="-1">
     <section class="hero section-dark" aria-labelledby="hero-title">
       <div class="hero-status mono reveal"><span><i></i> Open to automation opportunities</span><span>Scarborough, Ontario</span></div>
       <div class="hero-heading reveal">
@@ -125,8 +126,8 @@
     <div class="footer-row mono"><span>© <span id="year">2026</span> Sagar Jayswal</span><span>Scarborough, Ontario · <b id="local-time">—</b></span><a href="#main">Back to top ↑</a></div>
   </footer>
 
-  <dialog class="image-dialog" id="image-dialog" aria-labelledby="dialog-title"><div class="dialog-bar"><strong id="dialog-title">Project screenshot</strong><button type="button" id="dialog-close">Close</button></div><img id="dialog-image" src="" alt=""></dialog>
-  <noscript><p class="noscript">This portfolio needs JavaScript to display project and experience details. You can still contact Sagar at <a href="mailto:sagarjayswal63@gmail.com">sagarjayswal63@gmail.com</a>.</p></noscript>
+  <dialog class="image-dialog" id="image-dialog" aria-labelledby="dialog-title"><div class="dialog-bar"><strong id="dialog-title">Project screenshot</strong><button type="button" id="dialog-close">Close</button></div><img id="dialog-image" alt=""></dialog>
+  <noscript><p class="noscript">This portfolio needs JavaScript to display project and experience details. You can <a href="resume.html">read the printable résumé</a>, <a href="assets/Sagar-Jayswal-Automation-Resume.pdf" download>download the résumé PDF</a>, or contact Sagar at <a href="mailto:sagarjayswal63@gmail.com">sagarjayswal63@gmail.com</a>.</p></noscript>
   <script src="assets/js/content.js"></script>
   <script src="assets/js/main.js"></script>
 </body>

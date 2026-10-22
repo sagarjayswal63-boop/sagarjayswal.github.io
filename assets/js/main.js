@@ -11,14 +11,14 @@
       return '<li><span class="mono">' + String(index + 1).padStart(2, "0") + '</span><strong>' + step + '</strong></li>';
     }).join("") + '</ol>' : "";
     var tabClass = project.gallery.length % 2 ? " gallery-tabs-odd" : "";
-    return flow + '<div class="gallery" data-gallery><button type="button" class="gallery-open" aria-label="Open larger image: ' + first.title + '"><img class="gallery-main" src="' + first.src + '" alt="' + first.alt + '" loading="lazy" decoding="async"></button><div class="gallery-caption"><strong>' + first.title + '</strong><span>' + first.caption + '</span></div><div class="gallery-tabs' + tabClass + '" role="tablist" aria-label="' + project.title + ' images" style="--gallery-count:' + project.gallery.length + '">' + project.gallery.map(function (image, index) {
-      return '<button type="button" role="tab" aria-selected="' + (index === 0 ? "true" : "false") + '" data-src="' + image.src + '" data-title="' + image.title + '" data-caption="' + image.caption + '" data-alt="' + image.alt + '"><span class="mono">' + String(index + 1).padStart(2, "0") + '</span>' + image.label + '</button>';
+    return flow + '<div class="gallery" data-gallery><div id="gallery-panel-' + project.id + '" role="tabpanel" aria-labelledby="gallery-tab-' + project.id + '-0"><button type="button" class="gallery-open" aria-label="Open larger image: ' + first.title + '"><img class="gallery-main" src="' + first.src + '" alt="' + first.alt + '" loading="lazy" decoding="async"></button><div class="gallery-caption"><strong>' + first.title + '</strong><span>' + first.caption + '</span></div></div><div class="gallery-tabs' + tabClass + '" role="tablist" aria-label="' + project.title + ' images" style="--gallery-count:' + project.gallery.length + '">' + project.gallery.map(function (image, index) {
+      return '<button type="button" role="tab" id="gallery-tab-' + project.id + '-' + index + '" aria-controls="gallery-panel-' + project.id + '" tabindex="' + (index === 0 ? '0' : '-1') + '" aria-selected="' + (index === 0 ? "true" : "false") + '" data-src="' + image.src + '" data-title="' + image.title + '" data-caption="' + image.caption + '" data-alt="' + image.alt + '"><span class="mono">' + String(index + 1).padStart(2, "0") + '</span>' + image.label + '</button>';
     }).join("") + '</div></div>';
   }
 
   function renderProjects() {
     document.getElementById("projects").innerHTML = content.projects.map(function (project, index) {
-      return '<article class="project reveal"><button class="project-summary" type="button" aria-expanded="' + (index === 0 ? "true" : "false") + '" aria-controls="panel-' + project.id + '"><span class="mono">' + project.year + '</span><span class="project-title">' + project.title + '</span><span class="project-teaser">' + project.summary + '</span><span class="project-arrow" aria-hidden="true">↗</span></button><div class="project-panel" id="panel-' + project.id + '"' + (index === 0 ? "" : " hidden") + '><div class="project-copy"><div class="project-meta">' + project.tags.map(function (tag) { return '<span>' + tag + '</span>'; }).join("") + '</div><p>' + project.description + '</p><p><strong>Result:</strong> ' + project.outcome + '</p><ul class="project-points">' + project.points.map(function (point) { return '<li>' + point + '</li>'; }).join("") + '</ul></div><div class="project-visual">' + projectVisual(project) + '</div></div></article>';
+      return '<article class="project reveal" id="project-' + project.id + '"><h3 class="project-heading"><button class="project-summary" type="button" aria-expanded="' + (index === 0 ? "true" : "false") + '" aria-controls="panel-' + project.id + '"><span class="mono">' + project.year + '</span><span class="project-title">' + project.title + '</span><span class="project-teaser">' + project.summary + '</span><span class="project-arrow" aria-hidden="true">+</span><span class="project-action mono">' + (index === 0 ? 'Hide details' : 'View details') + '</span></button></h3><div class="project-panel" id="panel-' + project.id + '"' + (index === 0 ? "" : " hidden") + '><div class="project-copy"><div class="project-meta">' + project.tags.map(function (tag) { return '<span>' + tag + '</span>'; }).join("") + '</div><p>' + project.description + '</p><p class="project-result"><strong>Result:</strong> ' + project.outcome + '</p><ul class="project-points">' + project.points.map(function (point) { return '<li>' + point + '</li>'; }).join("") + '</ul></div><div class="project-visual">' + projectVisual(project) + '</div></div></article>';
     }).join("");
   }
 
@@ -54,10 +54,16 @@
   function setMenu(open) {
     menu.classList.toggle("open", open);
     menu.setAttribute("aria-hidden", open ? "false" : "true");
+    menu.inert = !open;
+    [document.querySelector(".site-header"), document.querySelector("main"), document.querySelector("footer")].forEach(function (element) { element.inert = open; });
     menuToggle.setAttribute("aria-expanded", open ? "true" : "false");
     document.body.classList.toggle("menu-open", open);
     if (open) menuClose.focus(); else menuToggle.focus();
   }
+
+  window.addEventListener("resize", function () {
+    if (window.innerWidth > 980 && menu.classList.contains("open")) setMenu(false);
+  });
 
   menuToggle.addEventListener("click", function () { setMenu(true); });
   menuClose.addEventListener("click", function () { setMenu(false); });
@@ -78,6 +84,7 @@
       var open = button.getAttribute("aria-expanded") === "true";
       button.setAttribute("aria-expanded", String(!open));
       panel.hidden = open;
+      button.querySelector(".project-action").textContent = open ? "View details" : "Hide details";
     });
   });
 
@@ -90,7 +97,11 @@
     var caption = gallery.querySelector(".gallery-caption span");
     var tabs = Array.prototype.slice.call(gallery.querySelectorAll('[role="tab"]'));
     function selectTab(tab) {
-      tabs.forEach(function (item) { item.setAttribute("aria-selected", item === tab ? "true" : "false"); });
+      tabs.forEach(function (item) {
+        item.setAttribute("aria-selected", item === tab ? "true" : "false");
+        item.tabIndex = item === tab ? 0 : -1;
+      });
+      gallery.querySelector('[role="tabpanel"]').setAttribute("aria-labelledby", tab.id);
       mainImage.src = tab.dataset.src;
       mainImage.alt = tab.dataset.alt;
       title.textContent = tab.dataset.title;
@@ -100,9 +111,11 @@
     tabs.forEach(function (tab, index) {
       tab.addEventListener("click", function () { selectTab(tab); });
       tab.addEventListener("keydown", function (event) {
-        if (event.key !== "ArrowRight" && event.key !== "ArrowLeft") return;
+        if (["ArrowRight", "ArrowLeft", "Home", "End"].indexOf(event.key) === -1) return;
         event.preventDefault();
         var next = event.key === "ArrowRight" ? (index + 1) % tabs.length : (index - 1 + tabs.length) % tabs.length;
+        if (event.key === "Home") next = 0;
+        if (event.key === "End") next = tabs.length - 1;
         tabs[next].focus(); selectTab(tabs[next]);
       });
     });
@@ -121,10 +134,10 @@
   var revealItems = document.querySelectorAll(".reveal");
   if (!reducedMotion && "IntersectionObserver" in window) {
     var observer = new IntersectionObserver(function (entries) {
-      entries.forEach(function (entry) { if (entry.isIntersecting) { entry.target.classList.add("visible"); observer.unobserve(entry.target); } });
+      entries.forEach(function (entry) { if (entry.isIntersecting) { entry.target.classList.remove("reveal-pending"); observer.unobserve(entry.target); } });
     }, { threshold: .08 });
-    revealItems.forEach(function (item) { observer.observe(item); });
-  } else revealItems.forEach(function (item) { item.classList.add("visible"); });
+    revealItems.forEach(function (item) { item.classList.add("reveal-pending"); observer.observe(item); });
+  }
 
   var cursor = document.querySelector(".cursor-glow");
   if (!reducedMotion && window.matchMedia("(pointer:fine)").matches) {
