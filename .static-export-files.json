@@ -5,7 +5,7 @@
   "_next/static/chunks/117-27840ce21fa8675b.js",
   "_next/static/chunks/app/_not-found/page-b62982a1b0a6c401.js",
   "_next/static/chunks/app/layout-a50cb963dedcfc33.js",
-  "_next/static/chunks/app/page-713cfad98c3508a7.js",
+  "_next/static/chunks/app/page-49f08791e6e2aa1e.js",
   "_next/static/chunks/fd9d1056-87da80e0c187477b.js",
   "_next/static/chunks/framework-f66176bb897dc684.js",
   "_next/static/chunks/main-50e9969062e95d11.js",
@@ -14,9 +14,9 @@
   "_next/static/chunks/pages/_error-7ba65e1336b92748.js",
   "_next/static/chunks/polyfills-42372ed130431b0a.js",
   "_next/static/chunks/webpack-32ae8cac328ddb49.js",
-  "_next/static/css/d57100a34ccd66aa.css",
-  "_next/static/jegu6k8ZoO6BHurGV-iXi/_buildManifest.js",
-  "_next/static/jegu6k8ZoO6BHurGV-iXi/_ssgManifest.js",
+  "_next/static/css/68d051dec1209ff2.css",
+  "_next/static/nPsDz8dEDNf34h7C057O9/_buildManifest.js",
+  "_next/static/nPsDz8dEDNf34h7C057O9/_ssgManifest.js",
   "assets/Sagar-Jayswal-Automation-Resume.pdf",
   "assets/fonts/jetbrains-mono-LICENSE.txt",
   "assets/fonts/jetbrains-mono.woff2",
@@ -42,6 +42,5 @@
   "assets/images/vision-inspection-interface.jpg",
   "index.html",
   "index.txt",
-  "resume.html",
-  "video/portfolio-background.mp4"
+  "resume.html"
 ]

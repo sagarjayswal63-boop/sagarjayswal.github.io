@@ -38,7 +38,8 @@ Next's dev server handles that prefix automatically.
 - `src/app/page.tsx`: server-rendered section composition.
 - `src/app/globals.css`: Tailwind layers, design tokens, cinematic overlays,
   responsive layout, reduced-motion fallbacks, and native dialog styling.
-- `src/components/CinematicVideo.tsx`: one cursor/scroll target and seek loop.
+- `src/components/PortfolioIntro.tsx`: greeting sequence and curved entrance curtain.
+- `src/components/PortraitBackdrop.tsx`: uploaded portrait, lighting and light pointer parallax.
 - `src/components/Navbar.tsx`: active pill and accessible native mobile dialog.
 - `src/components/LenisProvider.tsx`: inertial desktop scrolling and lifecycle.
 - `src/components/CustomCursor.tsx`: LERP ring/dot and magnetic targets.
@@ -48,9 +49,9 @@ Next's dev server handles that prefix automatically.
 - `src/lib/portfolio.json`: existing real projects, experience, education, skills,
   and detailed résumé responsibilities.
 - `src/lib/certifications.ts`: certification schema and cylinder math.
-- `public/`: real project images, font licenses, résumé, poster and video.
+- `public/`: real project images, font licenses, résumé and portrait.
 
-The root `index.html`, `_next/`, `video/` and public assets are the **compiled
+The root `index.html`, `_next/` and public assets are the **compiled
 Next.js snapshot** used by the existing main-branch Pages publisher. Do not edit
 the compiled HTML/chunks. Edit `src/` and `public/`, run `npm run publish:prepare`,
 and commit the source plus generated snapshot. `.static-export-source.sha256`
@@ -78,31 +79,25 @@ The full seven-page cinematic guide was reviewed in the preceding refinement.
 The latest request explicitly changes the architecture to Next.js; its design
 and interaction rules are adapted to the verified engineering information.
 
-## Video
+## Portrait and entrance animation
 
-`public/video/portfolio-background.mp4` is derived from the latest uploaded
-`799354785_1792634314244978.mp4`: 8 seconds, 720 × 1280, portrait. Its identity,
-framing, aspect ratio and duration are preserved. The hero/poster uses the separately uploaded landscape portrait
-`file_00000000fc7081f5a44406f8baa12a90.jpg`, with its original pixels preserved. H.264/CRF 20, all-intra encoding (`-g 1 -keyint_min 1`), audio removal and
-fast-start metadata give a ~7.1 MiB seek-friendly file. Every frame is independently
-decodable for forward/reverse scrubbing. The previous video remains in the
-legacy assets for recovery; the app loads only this new video.
+The video engine and published MP4 files have been removed. The hero uses the
+exact uploaded landscape portrait `file_00000000fc7081f5a44406f8baa12a90.jpg`.
+No video element, decoder, video preloading or seek loop runs on the site.
 
-The video has `muted`, `playsInline`, `preload="auto"`, no autoplay and no loop.
-Cursor scrubbing works on pointer devices, and native scroll scrubbing works
-on desktop and touch devices, including four-core/low-memory hardware.
-Reduced-motion and data-saver preferences use the poster without fetching the MP4. One RAF loop selects
-the most recent cursor or document-scroll target, applies LERP 0.10, pauses
-and seeks after metadata, and catches transient seek errors. There is no
-`readyState >= 2` seek gate. One seek at a time and a 20–30Hz cap prevent redundant
-decode work while retaining the requested .001-second threshold. It sleeps at
-rest and in hidden tabs. A visible motion control stops cinematic movement.
+A short multilingual greeting leads into a curved upward curtain reveal and
+staggered hero entrance. The reference website was inaccessible from this
+environment, so this is an original interpretation of the requested entrance,
+using the existing black/crimson identity rather than copied source code.
+The sequence takes at most 2.55 seconds, never waits for network resources,
+and has a four-second CSS fallback if hydration fails. It can be skipped with its button, Escape, Tab, wheel or touch. Deep links,
+restored scroll positions and reduced-motion preferences bypass it. A no-JavaScript
+style hides the curtain so all professional content stays available.
 
-The video container applies the requested scale, translate and 3D tilt. Dynamic
-spotlight, grain, scanlines, radial vignette and the two-pixel progress bar use
-CSS without per-frame blur filters. Native scrolling is preserved on mobile;
-Lenis is disabled for reduced motion and constrained devices. No global
-`overflow: hidden` is used. Native dialogs contain their own scrolling.
+The portrait preserves its composition on desktop; mobile framing keeps the
+face visible. Light pointer parallax, spotlight, grain and the scroll progress
+bar remain, with a motion toggle and reduced-motion support. Native touch
+scrolling stays available throughout. No global overflow lock is introduced.
 
 ## Certifications
 
@@ -143,9 +138,9 @@ secret is required. Both source and generated files live in the existing repo.
 
 ## Validation and limitations
 
-Six unit tests cover certification geometry/physics, real empty-data behavior,
-centering, and truthful issuer dialogs. The browser suite validates actual
-forward/reverse video seeking, document-scroll timing, pause/resume, all three
+Seven unit tests cover certification geometry/physics, real empty-data behavior,
+centering, truthful issuer dialogs, and entrance skip/cleanup under Strict Mode. The browser suite validates actual
+greeting/curtain completion and skipping, portrait parallax, pause/resume, all three
 project galleries, keyboard dialogs, seven timeline milestones/filters,
 clipboard, all media and Next chunk paths, seven viewport sizes, touch,
 reduced-motion/data-saver/device fallbacks, and readable HTML without JavaScript.

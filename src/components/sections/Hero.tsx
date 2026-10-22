@@ -12,6 +12,6 @@ export default function Hero() {
       <div className="telemetry"><div><strong>4+</strong><span className="mono">Years of experience</span></div><div><strong>{portfolio.projects.length.toString().padStart(2, '0')}</strong><span className="mono">Documented projects</span></div></div>
       <div className="hero-status mono"><i aria-hidden="true" />Open to automation opportunities</div>
     </div>
-    <div className="hero-bottom mono"><a href="#about">Scroll to inspect ↓</a><span>Cursor / scroll controlled</span></div>
+    <div className="hero-bottom mono"><a href="#about">Scroll to inspect ↓</a><span>Automation in motion</span></div>
   </section>;
 }

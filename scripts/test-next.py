@@ -33,30 +33,24 @@ with TemporaryDirectory(prefix='portfolio-next-') as temporary:
             page.on('pageerror', lambda error: errors.append(str(error)))
             page.route('**/*', lambda route: route.continue_() if route.request.url.startswith(base) else route.abort())
             page.goto(base, wait_until='domcontentloaded')
-            page.wait_for_function("document.querySelector('video').readyState >= 2")
-            assert page.locator('video').get_attribute('preload') == 'auto'
-            assert page.locator('video').evaluate('(v)=>v.paused && !v.autoplay && !v.loop && v.duration === 8')
-            # Observe actual decoded pixels and currentTime samples, not only targets.
-            page.evaluate("""() => {
-                window.scrubSamples = [];
-                const v = document.querySelector('video');
-                const sample = () => { window.scrubSamples.push(v.currentTime); if (window.scrubSamples.length < 120) requestAnimationFrame(sample); };
-                requestAnimationFrame(sample);
-                window.videoPixels = () => { const c = document.createElement('canvas'); c.width = 72; c.height = 128; c.getContext('2d').drawImage(v,0,0,72,128); return c.toDataURL(); };
-                window.firstPixels = window.videoPixels();
-            }""")
+            requests = []
+            page.on('request', lambda request: requests.append(request.url))
+            page.wait_for_selector('.portfolio-intro')
+            assert page.locator('.intro-greetings span').count() == 4
+            page.screenshot(path='/tmp/portfolio-intro.png')
+            page.wait_for_selector('.intro-leaving', timeout=6000)
+            page.wait_for_timeout(300)
+            page.screenshot(path='/tmp/portfolio-curtain-reveal.png')
+            page.wait_for_selector('.portfolio-intro', state='detached', timeout=6000)
+            page.wait_for_function("getComputedStyle(document.querySelector('.hero-content')).opacity === '1'")
+            assert page.locator('video').count() == 0
+            assert page.locator('.hero-poster').evaluate('(v)=>v.complete && v.naturalWidth===1280')
             page.mouse.move(1296, 250)
-            page.wait_for_function("document.querySelector('video').currentTime>6", timeout=10000)
-            page.wait_for_function("!document.querySelector('video').seeking && window.videoPixels() !== window.firstPixels")
-            assert page.evaluate('new Set(window.scrubSamples.map(t=>t.toFixed(3))).size > 4'), 'No intermediate currentTime updates'
-            page.mouse.move(144, 250)
-            page.wait_for_function("document.querySelector('video').currentTime<1.1", timeout=10000)
-            page.evaluate('window.scrollTo(0,(document.documentElement.scrollHeight-innerHeight)*.25)')
-            page.wait_for_function("document.querySelector('video').cinematicState.mode==='scroll' && Math.abs(document.querySelector('video').currentTime-2)<.2", timeout=10000)
+            page.wait_for_function("document.querySelector('.cine-media').style.transform.includes('translate3d')")
             page.locator('#motion-toggle').click()
-            assert page.locator('video').evaluate('(v)=>v.paused && !v.cinematicState.scheduled')
+            assert page.locator('.cine-media').evaluate('(v)=>v.style.transform === ""')
             page.locator('#motion-toggle').click()
-            print('PASS: paused video metadata, forward/reverse cursor control, document scroll target, pause/resume', flush=True)
+            print('PASS: greeting curtain completes, uploaded portrait, no video, parallax and pause/resume', flush=True)
             assert page.locator('.project').count() == 3
             for project in page.locator('.project').all():
                 button = project.locator('.project-summary')
@@ -89,11 +83,9 @@ with TemporaryDirectory(prefix='portfolio-next-') as temporary:
                 elif link.startswith('/' + root.name + '/'):
                     response = page.request.get(base.split('/' + root.name)[0] + link)
                     assert response.ok, link
-            response = page.request.get(base + 'video/portfolio-background.mp4', headers={'Range': 'bytes=0-127'})
-            assert response.status == 206 and len(response.body()) == 128
             pdf = page.request.get(base + 'assets/Sagar-Jayswal-Automation-Resume.pdf')
             assert pdf.body().startswith(b'%PDF')
-            print('PASS: repository subpath assets, Next chunks, résumé PDF, video byte ranges', flush=True)
+            print('PASS: repository subpath assets, Next chunks, résumé PDF, no video assets', flush=True)
             for width, height in [(320,568), (390,844), (667,375), (768,1024), (980,800), (1024,768), (1440,1000)]:
                 page.set_viewport_size({'width': width, 'height': height})
                 page.wait_for_timeout(100)
@@ -122,38 +114,52 @@ with TemporaryDirectory(prefix='portfolio-next-') as temporary:
                 fallback.on('request', lambda request: requests.append(request.url))
                 fallback.route('**/*', lambda route: route.continue_() if route.request.url.startswith(base) else route.abort())
                 fallback.goto(base, wait_until='networkidle')
-                if name in ('reduced motion', 'data saver'):
-                    assert fallback.locator('video').evaluate('(v)=>!v.hasAttribute("src")')
-                    assert not any('.mp4' in url for url in requests), name
-                else:
-                    fallback.wait_for_function("document.querySelector('video').readyState >= 2")
-                    fallback.evaluate('window.scrollTo(0,(document.documentElement.scrollHeight-innerHeight)*.25)')
-                    fallback.wait_for_function("Math.abs(document.querySelector('video').currentTime-2)<.2")
-                    fallback.evaluate('window.scrollTo(0,0)')
-                    fallback.wait_for_function("document.querySelector('video').currentTime<.1")
-                    fallback.wait_for_function("!document.querySelector('video').cinematicState.scheduled")
-                    if name == 'constrained device':
-                        fallback.mouse.move(1100, 200)
-                        fallback.wait_for_function("document.querySelector('video').currentTime>6")
+                assert fallback.locator('video').count() == 0
+                assert not any('.mp4' in url for url in requests), name
+                if name == 'reduced motion':
+                    assert fallback.locator('.portfolio-intro').count() == 0
+                elif fallback.locator('.portfolio-intro').count():
+                    fallback.locator('.intro-skip').click()
+                fallback.wait_for_selector('.portfolio-intro', state='detached')
+                assert fallback.locator('.hero-poster').evaluate('(v)=>v.complete && v.naturalWidth===1280')
                 if name == 'touch':
                     fallback.locator('.menu-toggle').tap(); fallback.locator('#mobile-menu a[href="#work"]').tap()
                     fallback.locator('.project-summary').nth(1).tap(); assert fallback.locator('#panel-vision-upgrade').is_visible()
                     fallback.evaluate('window.scrollTo(0,0)'); fallback.screenshot(path='/tmp/next-portfolio-mobile.png')
                 fallback_context.close()
-                print('PASS:', name, 'fallback' if name in ('reduced motion', 'data saver') else 'forward/reverse scrubbing and idle RAF', flush=True)
+                print('PASS:', name, 'portrait and accessible entrance without MP4 requests', flush=True)
             nojs = browser.new_context(java_script_enabled=False).new_page()
             nojs.route('**/*', lambda route: route.continue_() if route.request.url.startswith(base) else route.abort())
             nojs.goto(base, wait_until='domcontentloaded')
             assert nojs.locator('#about').inner_text().find('4+ years') >= 0
             assert nojs.locator('#timeline .role').count() == 7
             assert nojs.locator('#panel-vision-upgrade').is_visible()
-            failed = browser.new_page()
-            failed.route('**/*', lambda route: route.abort() if '.mp4' in route.request.url or not route.request.url.startswith(base) else route.continue_())
-            failed.goto(base, wait_until='domcontentloaded')
-            failed.wait_for_function("document.querySelector('video').error !== null")
-            assert failed.locator('video').evaluate('(v)=>!v.cinematicState.enabled && !v.classList.contains("is-ready")')
+            assert nojs.locator('.portfolio-intro').is_hidden()
+            failedjs = context.new_page()
+            failedjs.route('**/*', lambda route: route.abort() if route.request.url.split('?')[0].endswith('.js') or not route.request.url.startswith(base) else route.continue_())
+            failedjs.goto(base, wait_until='domcontentloaded')
+            failedjs.wait_for_selector('.portfolio-intro', state='hidden', timeout=6500)
+            assert failedjs.locator('#hero-title').is_visible()
+            print('PASS: failed JavaScript download cannot trap the visitor behind the curtain', flush=True)
+            # Entrance must yield immediately to navigation and direct section links.
+            for action in ['Escape', 'Tab', 'wheel', 'button']:
+                entrance = context.new_page()
+                entrance.route('**/*', lambda route: route.continue_() if route.request.url.startswith(base) else route.abort())
+                entrance.goto(base, wait_until='domcontentloaded')
+                entrance.wait_for_selector('.intro-skip')
+                if action in ['Escape', 'Tab']: entrance.keyboard.press(action)
+                elif action == 'wheel': entrance.mouse.wheel(0,200)
+                else: entrance.locator('.intro-skip').click()
+                entrance.wait_for_selector('.portfolio-intro', state='detached', timeout=1000)
+                entrance.close()
+            deep = context.new_page()
+            deep.route('**/*', lambda route: route.continue_() if route.request.url.startswith(base) else route.abort())
+            deep.goto(base+'#work', wait_until='networkidle')
+            assert deep.locator('.portfolio-intro').count() == 0
+            assert deep.locator('video').count() == 0
+            assert not any('.mp4' in url for url in requests)
+            print('PASS: Escape/Tab/wheel/button skip, deep links and no-JavaScript entrance fallback', flush=True)
             assert not errors, errors
-            print('PASS: failed media request uses poster fallback', flush=True)
             print('PASS: SSR content and no-JavaScript project fallback; no hydration/runtime errors', flush=True)
             browser.close()
     finally:
