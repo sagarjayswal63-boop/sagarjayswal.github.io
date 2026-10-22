@@ -1,0 +1,42 @@
+name: Deploy the already-tested Next artifact
+on:
+  push:
+    branches: [main]
+    paths: [.github/workflows/recover-next-pages.yml]
+  workflow_dispatch:
+permissions:
+  contents: read
+  actions: read
+  pages: write
+  id-token: write
+concurrency:
+  group: pages
+  cancel-in-progress: true
+jobs:
+  recover:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify application still matches the tested build
+        run: |
+          git fetch origin 127da95 --depth=1
+          git diff --exit-code 127da95 HEAD -- src public package.json package-lock.json next.config.mjs postcss.config.mjs tailwind.config.ts tsconfig.json next-env.d.ts
+      - uses: actions/download-artifact@v4
+        with:
+          github-token: ${{ github.token }}
+          run-id: '39711028952'
+          name: github-pages
+          path: tested-artifact
+      - uses: actions/upload-artifact@v4
+        with:
+          name: github-pages
+          path: tested-artifact/artifact.tar
+          retention-days: 1
+      - uses: actions/configure-pages@v5
+      - name: Deploy the verified static artifact
+        id: deployment
+        uses: actions/deploy-pages@v4

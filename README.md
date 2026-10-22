@@ -143,3 +143,12 @@ reuse this configuration as a publicly exposed Next server; move to a maintained
 major before adding those capabilities. The dependency tree is not claimed to
 be vulnerability-free. Lenis uses the exact requested package name, whose
 maintainer has since renamed it to `lenis`.
+
+A guarded one-time recovery workflow can reuse the successful build artifact
+from run `39711028952` if registry installation is temporarily unavailable.
+It first verifies that all application, media and dependency source files still
+match the tested commit `127da95`, then downloads and republishes the untouched
+artifact through the normal Pages deployment action. It does not rebuild,
+change credentials, disable integrity/TLS checks, or publish stale application
+code. Future application changes use the normal build workflow; that workflow
+has bounded package-fetch retries and a ten-minute job timeout.
