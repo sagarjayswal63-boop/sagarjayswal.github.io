@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <!-- Google tag (gtag.js) -->
@@ -12,7 +12,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="description" content="Sagar Jayswal is an Automation & Controls Technician in Scarborough, Ontario, specializing in PLCs, HMIs, machine vision, robotics and industrial troubleshooting.">
-  <meta name="theme-color" content="#111214">
+  <meta name="theme-color" content="#030303">
   <meta property="og:type" content="website">
   <meta property="og:title" content="Sagar Jayswal — Automation & Controls Technician">
   <meta property="og:description" content="PLC programming, machine vision, robotics, commissioning and industrial troubleshooting.">
@@ -27,12 +27,10 @@
   <meta name="twitter:image" content="https://sagarjayswal63-boop.github.io/sagarjayswal.github.io/assets/images/sagar-jayswal-social-preview.png">
   <link rel="canonical" href="https://sagarjayswal63-boop.github.io/sagarjayswal.github.io/">
   <link rel="icon" href="assets/images/favicon.svg" type="image/svg+xml">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@75..125,400..900&family=DM+Mono:wght@400;500&family=Playfair+Display:ital,wght@1,500&display=swap" rel="stylesheet">
+  <link rel="preload" href="assets/fonts/oswald.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="assets/css/styles.css">
   <noscript><style>.menu-toggle { display: none; } .header-resume { display: block; }</style></noscript>
-  <title>Sagar Jayswal — Automation & Controls Technician</title>
+  <title>Sagar Jayswal — Automation &amp; Controls Technician</title>
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -49,9 +47,10 @@
   <a class="skip-link" href="#main">Skip to content</a>
   <div class="grain" aria-hidden="true"></div>
   <div class="cursor-glow" aria-hidden="true"></div>
+  <div class="scroll-progress" aria-hidden="true"></div>
 
   <header class="site-header" id="site-header">
-    <a class="brand" href="#main" aria-label="Sagar Jayswal, back to top"><span class="brand-mark">SJ</span><span>Sagar Jayswal</span></a>
+    <a class="brand" href="#main" aria-label="Sagar Jayswal, back to top"><span class="brand-mark">SJ<span class="brand-dot">.</span></span><span>Sagar Jayswal</span></a>
     <nav class="desktop-nav" aria-label="Primary navigation"><a href="#work">Work</a><a href="#experience">Experience</a><a href="#capabilities">Capabilities</a><a href="#contact">Contact</a></nav>
     <a class="header-resume" href="assets/Sagar-Jayswal-Automation-Resume.pdf" download>Résumé <span aria-hidden="true">↓</span></a>
     <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="mobile-menu">Menu</button>
@@ -63,44 +62,44 @@
   </div>
 
   <main id="main" tabindex="-1">
-    <section class="hero section-dark" aria-labelledby="hero-title">
-      <div class="hero-status mono reveal"><span><i></i> Open to automation opportunities</span><span>Scarborough, Ontario</span></div>
-      <div class="hero-heading reveal">
-        <p class="hero-role">Automation &amp; Controls Technician</p>
-        <h1 id="hero-title"><span>Sagar</span><span>Jayswal</span></h1>
-        <span class="hero-script">controls in motion</span>
+    <section class="hero section-dark" aria-labelledby="hero-title" id="hero">
+      <div class="hero-visual" aria-hidden="true">
+        <img class="hero-poster" src="assets/images/cinematic-poster.jpg" width="1280" height="720" alt="" fetchpriority="high">
+        <video id="cinematic-video" muted playsinline preload="none" data-src="assets/video/portfolio-background.mp4" poster="assets/images/cinematic-poster.jpg" tabindex="-1"></video>
+        <div class="hero-vignette"></div>
       </div>
-      <div class="hero-grid">
-        <div class="hero-copy reveal">
-          <p class="hero-lead">I troubleshoot, program and commission PLC-controlled equipment—from panel wiring to production-ready motion.</p>
-          <div class="hero-actions"><a class="button button-primary" href="#work">View selected work <span aria-hidden="true">↘</span></a><a class="button button-ghost" href="assets/Sagar-Jayswal-Automation-Resume.pdf" download>Download résumé <span aria-hidden="true">↓</span></a></div>
+      <div class="hero-atmosphere" aria-hidden="true"></div>
+      <div class="hero-content">
+        <p class="hero-eyebrow mono">Automation / Controls / Robotics</p>
+        <div class="hero-heading">
+          <h1 id="hero-title"><span>Engineering <b>motion.</b></span><span>Automating <b>possibilities.</b></span></h1>
         </div>
-        <div class="control-visual reveal" aria-label="Decorative control-system signal diagram">
-          <div class="visual-label mono"><span>CONTROL PATH</span><span>STATUS / READY</span></div>
-          <svg viewBox="0 0 640 330" role="img" aria-labelledby="diagram-title diagram-desc">
-            <title id="diagram-title">Industrial control signal path</title><desc id="diagram-desc">A stylized diagram connecting input, PLC, vision, robot and output stages.</desc>
-            <path class="signal-line" d="M68 166H190V80H320V248H454V136H574"/><path class="signal-pulse" d="M68 166H190V80H320V248H454V136H574"/>
-            <g class="node" transform="translate(68 166)"><circle r="27"/><text x="0" y="4">I/O</text></g><g class="node" transform="translate(190 80)"><circle r="34"/><text x="0" y="4">PLC</text></g><g class="node" transform="translate(320 248)"><circle r="42"/><text x="0" y="4">VISION</text></g><g class="node" transform="translate(454 136)"><circle r="36"/><text x="0" y="4">ROBOT</text></g><g class="node" transform="translate(574 136)"><circle r="27"/><text x="0" y="4">OUT</text></g>
-          </svg>
-          <div class="visual-foot mono"><span>BUILD</span><span>VERIFY</span><span>COMMISSION</span><span>REPEAT</span></div>
-        </div>
+        <div class="hero-identity"><p>Sagar Jayswal</p><span class="mono">Automation &amp; Controls Technician</span></div>
+        <p class="hero-lead">Building, troubleshooting, and improving industrial automation systems through PLC programming, robotics, machine vision, and controls engineering.</p>
+        <div class="hero-actions"><a class="button button-primary" href="#work">Explore work <span aria-hidden="true">↗</span></a><a class="button button-ghost" href="assets/Sagar-Jayswal-Automation-Resume.pdf" download>Download résumé <span aria-hidden="true">↓</span></a><a class="hero-contact" href="#contact">Contact me ↗</a></div>
+        <div class="hero-status mono"><i aria-hidden="true"></i> Open to automation opportunities</div>
       </div>
+      <div class="hero-bottom mono"><a href="#work">Scroll to explore <span aria-hidden="true">↓</span></a><span class="cinematic-hint" id="cinematic-hint">Scarborough, Ontario</span><button id="motion-toggle" type="button" aria-pressed="false" hidden>Pause motion</button></div>
     </section>
 
     <div class="marquee" aria-hidden="true"><div class="marquee-track"><span>PLC PROGRAMMING · MACHINE VISION · ROBOTICS · COMMISSIONING · TROUBLESHOOTING · </span><span>PLC PROGRAMMING · MACHINE VISION · ROBOTICS · COMMISSIONING · TROUBLESHOOTING · </span></div></div>
 
     <section class="section section-light" id="work" aria-labelledby="work-title">
-      <div class="section-head reveal"><span class="section-index mono">01 / Selected work</span><div><h2 id="work-title">Proof from the <em>plant floor.</em></h2><p>Three examples connecting diagnosis, integration and maintainable automation workflows.</p></div></div>
+      <div class="section-head reveal"><span class="section-index mono">01 / Selected work</span><div><h2 id="work-title">Engineering in <em>action.</em></h2><p>Three real-world case studies. From the signal path to the production floor — explore the systems, the work, and the validation.</p></div></div>
       <div class="projects" id="projects"></div>
     </section>
 
     <section class="section section-dark" id="experience" aria-labelledby="experience-title">
-      <div class="section-head reveal"><span class="section-index mono">02 / Experience</span><div><h2 id="experience-title">Built in the <em>field.</em></h2><p>A progression from control-panel assembly to live automation support and application engineering.</p></div></div>
+      <div class="section-head reveal"><span class="section-index mono">02 / Experience</span><div><h2 id="experience-title">Built on <em>experience.</em></h2><p>A progression from control-panel assembly to live automation support and application engineering.</p></div></div>
       <div class="timeline reveal" id="timeline"></div>
     </section>
 
     <section class="section section-light" id="capabilities" aria-labelledby="capabilities-title">
-      <div class="section-head reveal"><span class="section-index mono">03 / Capabilities</span><div><h2 id="capabilities-title">A practical <em>toolbox.</em></h2><p>Technologies grounded in diagnosis, verification, safe startup and clear documentation.</p></div></div>
+      <div class="section-head reveal"><span class="section-index mono">03 / Capabilities</span><div><h2 id="capabilities-title">The engineering <em>toolkit.</em></h2><p>Technologies grounded in diagnosis, verification, safe startup and clear documentation.</p></div></div>
+      <div class="signal-path reveal" aria-label="Industrial control signal path">
+        <span class="mono">Signal path / system thinking</span>
+        <ol><li><i aria-hidden="true"></i>Sense<span class="mono">Field devices</span></li><li><i aria-hidden="true"></i>Decide<span class="mono">PLC &amp; vision</span></li><li><i aria-hidden="true"></i>Move<span class="mono">Motion &amp; robotics</span></li><li><i aria-hidden="true"></i>Verify<span class="mono">Feedback &amp; diagnostics</span></li></ol>
+      </div>
       <div class="capability-grid reveal" id="capability-grid"></div>
     </section>
 
@@ -111,7 +110,7 @@
   </main>
 
   <footer class="contact" id="contact">
-    <div class="contact-heading reveal"><span class="section-index mono">05 / Open channel</span><h2>Let’s keep production <em>moving.</em></h2></div>
+    <div class="contact-heading reveal"><span class="section-index mono">05 / Open channel</span><h2>Let’s engineer <em>what’s next.</em></h2></div>
     <div class="contact-grid">
       <div class="contact-copy reveal"><p>Available for automation technician, controls and commissioning opportunities across the Greater Toronto Area.</p><a href="mailto:sagarjayswal63@gmail.com">sagarjayswal63@gmail.com <span aria-hidden="true">↗</span></a><a href="https://www.linkedin.com/in/sagar-jayswal" target="_blank" rel="noopener noreferrer">LinkedIn profile <span aria-hidden="true">↗</span></a><p class="form-note">Prefer a quick message? Use the form and it will be delivered by email.</p></div>
       <form class="contact-form reveal" action="https://formsubmit.co/sagarjayswal63@gmail.com" method="POST">
@@ -126,9 +125,10 @@
     <div class="footer-row mono"><span>© <span id="year">2026</span> Sagar Jayswal</span><span>Scarborough, Ontario · <b id="local-time">—</b></span><a href="#main">Back to top ↑</a></div>
   </footer>
 
-  <dialog class="image-dialog" id="image-dialog" aria-labelledby="dialog-title"><div class="dialog-bar"><strong id="dialog-title">Project screenshot</strong><button type="button" id="dialog-close">Close</button></div><img id="dialog-image" alt=""></dialog>
+  <dialog class="image-dialog" id="image-dialog" aria-labelledby="dialog-title"><div class="dialog-bar"><strong id="dialog-title">Project screenshot</strong><button type="button" id="dialog-close">Close</button></div><img id="dialog-image" src="assets/images/cinematic-poster.jpg" alt=""></dialog>
   <noscript><p class="noscript">This portfolio needs JavaScript to display project and experience details. You can <a href="resume.html">read the printable résumé</a>, <a href="assets/Sagar-Jayswal-Automation-Resume.pdf" download>download the résumé PDF</a>, or contact Sagar at <a href="mailto:sagarjayswal63@gmail.com">sagarjayswal63@gmail.com</a>.</p></noscript>
   <script src="assets/js/content.js"></script>
   <script src="assets/js/main.js"></script>
+  <script src="assets/js/cinematic.js" defer></script>
 </body>
 </html>

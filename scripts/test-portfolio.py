@@ -8,8 +8,9 @@ from functools import partial
 from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
 from threading import Thread
 from shutil import which
+from serve import RangeRequestHandler
 
-class QuietHandler(SimpleHTTPRequestHandler):
+class QuietHandler(RangeRequestHandler):
  def log_message(self, *args):
   pass
 

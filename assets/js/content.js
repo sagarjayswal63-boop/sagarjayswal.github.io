@@ -10,6 +10,7 @@ window.PORTFOLIO_CONTENT = {
       year: "2025 — Present",
       title: "Injection-Molding Cell Troubleshooting",
       summary: "Production support across PLC, vision, robot, sensor and pneumatic layers.",
+      challenge: "Isolate faults across interconnected PLC, HMI, vision, robot, sensor and pneumatic systems during production support.",
       description: "Troubleshoot PLC-controlled injection-molding cells and downstream equipment at Axiom Group. The work follows the complete signal path—from field device and I/O through logic, HMI, robot motion and final machine response.",
       outcome: "Supported reliable production recovery, commissioning, I/O verification and controlled sequence changes in live manufacturing environments.",
       tags: ["Omron PLC", "Keyence IV2 / IV3", "Wittmann", "HMI", "EOAT"],
@@ -32,6 +33,7 @@ window.PORTFOLIO_CONTENT = {
       year: "2026",
       title: "Multi-Camera Vision Inspection Upgrade",
       summary: "A complete PLC and machine-vision workflow update from logic review to validation.",
+      challenge: "Keep the PLC sequence, camera inspection programs and result mapping consistent through a complete vision-system upgrade.",
       description: "Upgraded a multi-camera inspection system by reviewing the existing PLC sequence, creating new vision programs, updating inspection-result mapping and testing the complete workflow.",
       outcome: "Completed and validated the end-to-end PLC/vision upgrade with clear result handling and reject logic.",
       tags: ["Machine vision", "PLC ladder", "Result mapping", "Inspection logic"],
@@ -53,6 +55,7 @@ window.PORTFOLIO_CONTENT = {
       year: "2026 / V1.3",
       title: "Automation Backup Manager",
       summary: "A verifiable workflow for PLC, HMI, robot, fixture and vision-system backups.",
+      challenge: "Organize scattered automation backups into a traceable workflow while preserving original source files.",
       description: "Defined and built a desktop tool that standardizes backup naming, folder creation, history and monthly coverage. It creates SHA-256-verified ZIP packages while preserving the original source.",
       outcome: "Turns scattered automation files into an organized, searchable and auditable maintenance workflow.",
       tags: ["Desktop tool", "SHA-256", "Traceability", "Backup workflow"],
@@ -100,12 +103,12 @@ window.PORTFOLIO_CONTENT = {
     }
   ],
   capabilities: [
-    { title: "PLC & controls", items: ["Allen-Bradley Studio 5000", "Siemens TIA Portal / S7-1200", "Omron Sysmac Studio", "CX-Programmer"] },
-    { title: "Vision & robotics", items: ["Keyence IV-series systems", "Camera setup and PLC interfacing", "Wittmann robot teaching", "Sequence adjustments"] },
-    { title: "Field diagnosis", items: ["PLC diagnostics and I/O", "Electrical troubleshooting", "Sensors and actuators", "Root-cause analysis"] },
-    { title: "Motion & pneumatics", items: ["Servo drives and VFDs", "Automated motion systems", "Pneumatic components", "EOAT modification support"] },
-    { title: "Networks & startup", items: ["EtherNet/IP", "PLC-to-equipment communications", "Equipment startup", "Production trials"] },
-    { title: "Delivery & upkeep", items: ["Functional and sequence testing", "Customer acceptance support", "Preventive/corrective maintenance", "Schematics and technical manuals"] }
+    { title: "PLC & controls", items: ["Omron CJ2M", "CX-Programmer", "Omron Sysmac Studio", "Allen-Bradley Studio 5000", "Siemens TIA Portal / S7-1200", "PLC troubleshooting and ladder logic", "Machine sequence modifications"] },
+    { title: "HMI", items: ["Omron NB-Series", "NB-Designer", "Alarm diagnostics", "Operator interfaces", "PLC/HMI program maintenance"] },
+    { title: "Robotics", items: ["Wittmann robot teaching", "Robot position adjustments", "End-of-arm tooling", "Motion integration", "Sequence adjustments"] },
+    { title: "Machine vision", items: ["Keyence IV / IV2 / IV3", "Keyence CV-X", "Camera setup and PLC interfacing", "Functional and sequence testing"] },
+    { title: "Industrial systems", items: ["Sensors and actuators", "Servo drives and VFDs", "Automated motion systems", "Pneumatic components", "EOAT modification support", "EtherNet/IP", "PLC-to-equipment communications", "Electrical troubleshooting", "Barcode readers and industrial label printers"] },
+    { title: "Engineering tools", items: ["Backup management", "Technical documentation", "Schematics and technical manuals", "PLC diagnostics and I/O", "Root-cause analysis", "Equipment startup and production trials", "Customer acceptance support", "Preventive/corrective maintenance"] }
   ],
   education: [
     { credential: "Advanced Diploma, Electro-Mechanical Engineering Technology: Automation and Robotics", school: "Centennial College / Toronto, ON", date: "Jan 2024 — Apr 2025" },
