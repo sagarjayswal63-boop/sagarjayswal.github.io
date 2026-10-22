@@ -83,8 +83,9 @@ and interaction rules are adapted to the verified engineering information.
 `public/video/portfolio-background.mp4` is derived from the latest uploaded
 `799354785_1792634314244978.mp4`: 8 seconds, 720 × 1280, portrait. Its identity,
 framing, aspect ratio and duration are preserved. The first-frame poster comes
-from the same clip. H.264/CRF 20, six-frame GOP, muted audio removal and fast-start
-metadata give a ~3.6 MB seek-friendly file. The previous video remains in the
+from the same clip. H.264/CRF 20, all-intra encoding (`-g 1 -keyint_min 1`), audio removal and
+fast-start metadata give a ~7.1 MiB seek-friendly file. Every frame is independently
+decodable for forward/reverse scrubbing. The previous video remains in the
 legacy assets for recovery; the app loads only this new video.
 
 The video has `muted`, `playsInline`, `preload="auto"`, no autoplay and no loop.
