@@ -7,8 +7,8 @@ const socialDescription = 'PLC programming, machine vision, robotics, commission
 export const metadata: Metadata = {
   metadataBase: new URL(site.url), title: `${site.name} — ${site.title}`, description: site.description,
   alternates: { canonical: site.url }, icons: { icon: asset('assets/images/favicon.svg') },
-  openGraph: { type: 'website', title: `${site.name} — ${site.title}`, description: socialDescription, url: site.url, images: [{ url: `${site.url}assets/images/sagar-jayswal-social-preview.png`, width: 1200, height: 630, alt: 'Sagar Jayswal — Automation and Controls Technician portfolio' }] },
-  twitter: { card: 'summary_large_image', title: `${site.name} — ${site.title}`, description: socialDescription, images: [`${site.url}assets/images/sagar-jayswal-social-preview.png`] },
+  openGraph: { type: 'website', title: `${site.name} — ${site.title}`, description: socialDescription, url: site.url, images: [{ url: `${site.url}assets/images/sagar-jayswal-social-preview-v2.jpg`, width: 1280, height: 720, type: 'image/jpeg', alt: 'Sagar Jayswal — Automation and Controls Technician portfolio' }] },
+  twitter: { card: 'summary_large_image', title: `${site.name} — ${site.title}`, description: socialDescription, images: [`${site.url}assets/images/sagar-jayswal-social-preview-v2.jpg`] },
 };
 export const viewport: Viewport = { width: 'device-width', initialScale: 1, viewportFit: 'cover', themeColor: '#030303' };
 export default function RootLayout({ children }: { children: React.ReactNode }) {
