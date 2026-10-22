@@ -56,9 +56,15 @@
     hero.style.setProperty("--hero-rx", (-y * .7).toFixed(3) + "deg");
     if (duration && !video.seeking && now - lastSeek >= 70 && Math.abs(video.currentTime - current) >= .035) {
       video.pause();
-      video.currentTime = clamp(current, 0, duration);
-      seekCount++;
-      lastSeek = now;
+      try {
+        video.currentTime = clamp(current, 0, duration);
+        seekCount++;
+        lastSeek = now;
+      } catch (error) {
+        // A source/decoder transition can temporarily reject a seek. Keep the
+        // last rendered frame and wait for a fresh metadata/canplay event.
+        duration = 0;
+      }
     }
     if (Math.abs(current - target) > .025 || Math.abs(x - targetX) > .005 || Math.abs(y - targetY) > .005 ||
         (duration && !video.seeking && Math.abs(video.currentTime - target) > .05)) wake();
@@ -91,12 +97,14 @@
       if (!enabled) video.classList.remove("is-ready");
     } else wake();
   }
-  video.addEventListener("loadedmetadata", function () {
+  function prepareVideo() {
     if (!Number.isFinite(video.duration) || video.duration <= 0) return;
     duration = Math.max(0, video.duration - 1 / 24);
     video.pause();
     wake();
-  }, options);
+  }
+  video.addEventListener("loadedmetadata", prepareVideo, options);
+  video.addEventListener("canplay", prepareVideo, options);
   video.addEventListener("loadeddata", function () {
     if (enabled) video.classList.add("is-ready");
   }, options);

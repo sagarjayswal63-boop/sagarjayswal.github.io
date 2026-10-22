@@ -69,6 +69,8 @@
         <div class="hero-vignette"></div>
       </div>
       <div class="hero-atmosphere" aria-hidden="true"></div>
+      <div class="hero-scan" aria-hidden="true"></div>
+      <span class="hero-watermark" aria-hidden="true">Sagar</span>
       <div class="hero-content">
         <p class="hero-eyebrow mono">Automation / Controls / Robotics</p>
         <div class="hero-heading">
@@ -90,8 +92,14 @@
     </section>
 
     <section class="section section-dark" id="experience" aria-labelledby="experience-title">
-      <div class="section-head reveal"><span class="section-index mono">02 / Experience</span><div><h2 id="experience-title">Built on <em>experience.</em></h2><p>A progression from control-panel assembly to live automation support and application engineering.</p></div></div>
-      <div class="timeline reveal" id="timeline"></div>
+      <div class="section-head reveal"><span class="section-index mono">02 / The journey</span><div><h2 id="experience-title">Built on <em>experience.</em></h2><p>Work experience and education, connected. From electrical engineering fundamentals and control-panel assembly to live automation support and application engineering.</p></div></div>
+      <div class="journey-filters" id="journey-filters" role="group" aria-label="Filter journey milestones" hidden>
+        <button type="button" data-journey-filter="all" aria-pressed="true" aria-controls="timeline">All</button>
+        <button type="button" data-journey-filter="work" aria-pressed="false" aria-controls="timeline">Work experience</button>
+        <button type="button" data-journey-filter="education" aria-pressed="false" aria-controls="timeline">Education</button>
+      </div>
+      <p class="journey-status mono" id="journey-status" role="status"></p>
+      <div class="timeline" id="timeline"></div>
     </section>
 
     <section class="section section-light" id="capabilities" aria-labelledby="capabilities-title">
@@ -103,16 +111,12 @@
       <div class="capability-grid reveal" id="capability-grid"></div>
     </section>
 
-    <section class="section credentials" aria-labelledby="education-title">
-      <div class="section-head reveal"><span class="section-index mono">04 / Education</span><div><h2 id="education-title">Strong <em>fundamentals.</em></h2><p>Electrical engineering knowledge extended through automation, robotics and hands-on industrial work.</p></div></div>
-      <div class="education-list reveal" id="education-list"></div>
-    </section>
   </main>
 
   <footer class="contact" id="contact">
-    <div class="contact-heading reveal"><span class="section-index mono">05 / Open channel</span><h2>Let’s engineer <em>what’s next.</em></h2></div>
+    <div class="contact-heading reveal"><span class="section-index mono">04 / Open channel</span><h2>Let’s engineer <em>what’s next.</em></h2></div>
     <div class="contact-grid">
-      <div class="contact-copy reveal"><p>Available for automation technician, controls and commissioning opportunities across the Greater Toronto Area.</p><a href="mailto:sagarjayswal63@gmail.com">sagarjayswal63@gmail.com <span aria-hidden="true">↗</span></a><a href="https://www.linkedin.com/in/sagar-jayswal" target="_blank" rel="noopener noreferrer">LinkedIn profile <span aria-hidden="true">↗</span></a><p class="form-note">Prefer a quick message? Use the form and it will be delivered by email.</p></div>
+      <div class="contact-copy reveal"><p>Available for automation technician, controls and commissioning opportunities across the Greater Toronto Area.</p><a href="mailto:sagarjayswal63@gmail.com">sagarjayswal63@gmail.com <span aria-hidden="true">↗</span></a><a href="https://www.linkedin.com/in/sagar-jayswal" target="_blank" rel="noopener noreferrer">LinkedIn profile <span aria-hidden="true">↗</span></a><div class="email-tools" hidden><button class="copy-email" id="copy-email" type="button">Copy email address</button><span id="copy-status" role="status"></span></div><p class="form-note">Prefer a quick message? Use the form and it will be delivered by email.</p></div>
       <form class="contact-form reveal" action="https://formsubmit.co/sagarjayswal63@gmail.com" method="POST">
         <input type="hidden" name="_subject" value="New portfolio enquiry for Sagar Jayswal"><input type="hidden" name="_template" value="table"><input type="hidden" name="_captcha" value="false"><input type="hidden" name="_next" value="https://sagarjayswal63-boop.github.io/sagarjayswal.github.io/?sent=1#contact">
         <div class="field"><label for="name">Name</label><input id="name" name="name" type="text" autocomplete="name" required></div>

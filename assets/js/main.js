@@ -23,9 +23,37 @@
   }
 
   function renderExperience() {
-    document.getElementById("timeline").innerHTML = content.experience.map(function (item) {
-      return '<article class="role reveal"><div><time class="role-date mono">' + item.date + '</time>' + (item.current ? '<span class="current mono">Current role</span>' : "") + '</div><div><h3>' + item.role + '</h3><p class="role-company">' + item.company + '</p></div><p class="role-detail">' + item.detail + '</p></article>';
+    var milestones = content.experience.map(function (item) {
+      return { kind: "work", date: item.date, title: item.role, place: item.company, detail: item.detail, current: item.current };
+    }).concat(content.education.map(function (item) {
+      return { kind: "education", date: item.date, title: item.credential, place: item.school };
+    }));
+    function startDate(item) {
+      var date = item.date.match(/([A-Za-z]+) (\d{4})/);
+      var months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+      return Number(date[2]) * 12 + months.indexOf(date[1]);
+    }
+    milestones.sort(function (a, b) { return startDate(b) - startDate(a); });
+    document.getElementById("timeline").innerHTML = milestones.map(function (item) {
+      return '<article class="role reveal" data-kind="' + item.kind + '"><div><span class="milestone-kind mono">' + (item.kind === "work" ? "Work experience" : "Education") + '</span><time class="role-date mono">' + item.date + '</time>' + (item.current ? '<span class="current mono">Current role</span>' : "") + '</div><div><h3>' + item.title + '</h3><p class="role-company">' + item.place + '</p></div>' + (item.detail ? '<p class="role-detail">' + item.detail + '</p>' : "") + '</article>';
     }).join("");
+    var filters = document.getElementById("journey-filters");
+    var buttons = filters.querySelectorAll("button");
+    function filterJourney(kind) {
+      var visible = 0;
+      document.querySelectorAll("#timeline .role").forEach(function (card) {
+        card.hidden = kind !== "all" && card.dataset.kind !== kind;
+        card.classList.toggle("role-right", !card.hidden && visible % 2 === 1);
+        if (!card.hidden) visible++;
+      });
+      buttons.forEach(function (button) { button.setAttribute("aria-pressed", String(button.dataset.journeyFilter === kind)); });
+      document.getElementById("journey-status").textContent = visible + " " + (kind === "education" ? "education" : kind === "work" ? "work experience" : "career & education") + " milestones";
+    }
+    buttons.forEach(function (button) {
+      button.addEventListener("click", function () { filterJourney(button.dataset.journeyFilter); updateNavigation(); });
+    });
+    filters.hidden = false;
+    filterJourney("all");
   }
 
   function renderCapabilities() {
@@ -34,16 +62,9 @@
     }).join("");
   }
 
-  function renderEducation() {
-    document.getElementById("education-list").innerHTML = content.education.map(function (item) {
-      return '<article class="education-item"><h3>' + item.credential + '</h3><p>' + item.school + '</p><time class="mono">' + item.date + '</time></article>';
-    }).join("");
-  }
-
   renderProjects();
   renderExperience();
   renderCapabilities();
-  renderEducation();
 
   var menu = document.getElementById("mobile-menu");
   var menuToggle = document.querySelector(".menu-toggle");
@@ -139,9 +160,46 @@
     revealItems.forEach(function (item) { item.classList.add("reveal-pending"); observer.observe(item); });
   }
 
-  var cursor = document.querySelector(".cursor-glow");
-  if (!reducedMotion && window.matchMedia("(pointer:fine)").matches) {
-    document.addEventListener("pointermove", function (event) { cursor.style.left = event.clientX + "px"; cursor.style.top = event.clientY + "px"; });
+  var nav = document.querySelector(".desktop-nav");
+  var navLinks = Array.prototype.slice.call(nav.querySelectorAll("a"));
+  var sectionLinks = navLinks.concat(menuLinks.filter(function (link) { return link.hash; }));
+  function updateNavigation() {
+    if (!navLinks) return;
+    var active = "";
+    navLinks.forEach(function (link) {
+      var section = document.querySelector(link.hash);
+      if (section.getBoundingClientRect().top <= Math.max(150, window.innerHeight * .3)) active = link.hash;
+    });
+    sectionLinks.forEach(function (link) {
+      if (link.hash === active) link.setAttribute("aria-current", "location");
+      else link.removeAttribute("aria-current");
+    });
+    var selected = navLinks.filter(function (link) { return link.hash === active; })[0];
+    nav.classList.toggle("has-active", Boolean(selected));
+    if (selected) {
+      var rect = selected.getBoundingClientRect();
+      nav.style.setProperty("--pill-x", (rect.left - nav.getBoundingClientRect().left - 10) + "px");
+      nav.style.setProperty("--pill-width", (rect.width + 20) + "px");
+    }
+  }
+  window.addEventListener("scroll", updateNavigation, { passive: true });
+  window.addEventListener("resize", updateNavigation, { passive: true });
+  if (document.fonts) document.fonts.ready.then(updateNavigation);
+  updateNavigation();
+
+  var copyEmail = document.getElementById("copy-email");
+  if (navigator.clipboard && window.isSecureContext) {
+    copyEmail.parentElement.hidden = false;
+    copyEmail.addEventListener("click", async function () {
+      var status = document.getElementById("copy-status");
+      try {
+        var address = document.querySelector('.contact-copy a[href^="mailto:"]').getAttribute("href").slice(7);
+        await navigator.clipboard.writeText(address);
+        status.textContent = "Email address copied.";
+      } catch (error) {
+        status.textContent = "Copy unavailable. Use the email link above.";
+      }
+    });
   }
 
   var time = document.getElementById("local-time");

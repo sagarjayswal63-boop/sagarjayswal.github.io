@@ -66,6 +66,7 @@ python3 -m venv /tmp/portfolio-tests
 /tmp/portfolio-tests/bin/python -m playwright install chromium
 /tmp/portfolio-tests/bin/python scripts/test-portfolio.py
 /tmp/portfolio-tests/bin/python scripts/test-cinematic.py
+/tmp/portfolio-tests/bin/python scripts/test-guide.py
 ```
 
 The smoke test starts its own temporary local server. It checks all three
@@ -127,14 +128,43 @@ verified during download. Each font's license is retained in `assets/fonts/`.
 
 ### Validation and remaining limits
 
-Run both Python smoke tests and the three JavaScript syntax checks (including
+Run all three Python smoke tests and the three JavaScript syntax checks (including
 `node --check assets/js/cinematic.js`). HTML was checked with html-validate 10,
 using its recommended rules with the stylistic `tel-non-breaking` rule disabled
 to retain the existing résumé telephone formatting.
 
-The seven-page design PDF named in the brief was not present among the supplied
-attachments. The portrait JPG and written cinematic specification guided this
-implementation. No claim of reading the missing guide is made.
+All seven pages of `Cinematic_Swag_Portfolio_Guide.pdf` were subsequently
+reviewed, including rendered pages and extracted text. Guide alignment:
+
+- Pages 1–3: the supplied portrait and video already complete the media workflow.
+  No face replacement, new character, or regeneration is needed.
+- Pages 4–5: the static site maps the guide's component architecture to existing
+  files. Its single paused-video engine already implements LERP, parallax,
+  lighting, grain, progress, metadata handling, and seek throttling. Seek
+  exceptions are now guarded, with metadata/canplay recovery. Faint scanlines
+  complete the atmospheric layers. No credentials exist to populate the
+  cylindrical certification gallery, so that public section remains excluded.
+- Page 6: work and education now share a date-ordered alternating journey with
+  keyboard-accessible All / Work Experience / Education filters. Original dates,
+  schools, employers, and descriptions are preserved. Active navigation uses a
+  sliding pill and `aria-current`; the contact section adds accessible clipboard
+  success/failure feedback. The hero adds a subtle outlined first-name watermark
+  and readable gradient text while keeping the requested engineering headline.
+- Page 7: the existing measured six-frame GOP optimization remains; the much
+  larger all-intra candidate was not needed. Actual forward and reverse seeking
+  are tested, rather than assuming an active animation loop means video moves.
+
+The original brief takes precedence over the template's generic full-stack
+role, sample statistics, image-generation instructions, Next.js migration,
+Lenis dependency, and fictional verification hashes. Native scrolling and
+reduced-motion/touch fallbacks remain. The guide's prohibition on overflow
+locking pertains to Lenis; the site uses native scrolling with modal-only
+vertical scroll locking. A custom cursor is optional and is omitted to retain
+normal cursor behavior and reduce continuous work.
+
+`test-guide.py` exercises all seven milestones, keyboard and touch filters,
+card alternation after filtering, active navigation, and clipboard success and
+permission-denied feedback without sending a contact message.
 
 The environment initially denied requests to the published Pages host and
 GitHub API. Network additions were saved for `sagarjayswal63-boop.github.io` and
