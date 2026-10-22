@@ -157,3 +157,14 @@ major before adding those capabilities. The dependency tree is not claimed to
 be vulnerability-free. Lenis uses the exact requested package name, whose
 maintainer has since renamed it to `lenis`.
 
+
+## LinkedIn preview
+
+Open Graph and Twitter metadata use `assets/images/sagar-jayswal-social-preview-v3.jpg`,
+a 1200 × 630 capture of the actual hero with compact preview-only spacing. The
+portrait, fonts, heading and professional information come from the exported site.
+To regenerate after content changes, run `npm run build`, then
+`python3 scripts/generate-social-preview.py`, then `npm run publish:prepare`.
+The generator requires Python Playwright and Chromium. Its styles affect only the
+captured image; the website layout is unchanged. LinkedIn caches existing cards;
+use its Post Inspector and, if needed, replace the Featured link thumbnail.
