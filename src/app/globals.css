@@ -387,3 +387,8 @@ html.lenis {height:auto}.lenis.lenis-smooth {scroll-behavior:auto!important}.len
 .brand > span.brand-mark {font:700 30px var(--hero);letter-spacing:-.04em}
 .contact {padding-bottom:100px}
 @media (max-width:660px){.brand > span.brand-mark{font-size:25px}}
+
+/* The uploaded landscape portrait keeps its composition independently of the portrait video. */
+.cine-media .hero-poster { width:100%; right:0; object-fit:contain; transition:opacity .5s; }
+.cine-media:has(#cinematic-video.is-ready) .hero-poster { opacity:0; }
+@media (max-width:660px) { .cine-media .hero-poster { object-fit:cover; object-position:68% center; } }

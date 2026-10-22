@@ -90,7 +90,7 @@ export default function CinematicVideo() {
   return <>
     <div className="cinematic-background" aria-hidden="true">
       <div className="cine-media" ref={visual}>
-        <img className="hero-poster" src={asset('assets/images/portrait-poster.jpg')} width={720} height={1280} alt="" fetchPriority="high" />
+        <img className="hero-poster" src={asset('assets/images/portrait-poster.jpg')} width={1280} height={720} alt="" fetchPriority="high" />
         <video ref={ref} id="cinematic-video" muted playsInline preload="auto" poster={asset('assets/images/portrait-poster.jpg')} tabIndex={-1} />
       </div>
       <div className="cine-vignette" /><div className="cine-glow" id="cine-glow" /><div className="cine-grain" /><div className="cine-scan" />
